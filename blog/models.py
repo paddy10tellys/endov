@@ -58,25 +58,22 @@ class User:
         user = self.find()
         today=datetime.now()
         
-        day = today.day
-        print(today.month)
-        print(today.year)
+        id=str(uuid.uuid4())
         
         post = Node (
             "Post",
-            id=str(uuid.uuid4()),
+            id=id,
             title=title,
             text=text,
             timestamp=int(today.strftime("%s")),
             date=today.strftime("%F")
         )
 
+        text = id + " " + text
         
-        
-    #     #create the text file that will be the input into ctakes runClinicalPipeline.sh & save it into the note_input directory
-    #     with open("/home/pmy/ctakes/apache-ctakes-4.0.0/note_input/note.txt", mode='w') as f:
-    #         text = text
-    #         f.write(text)  
+        #create the text file that will be the input into ctakes runClinicalPipeline.sh & save it into the note_input directory
+        with open("/home/pmy/ctakes/apache-ctakes-4.0.0/note_input/note.txt", mode='w') as f:
+            f.write(text)  
             
     #     #run ctakes in a subprocess
     #     p = Popen(["sh" , "/home/pmy/ctakes/apache-ctakes-4.0.0/bin/runClinicalPipeline.sh"]) # something long running
@@ -91,7 +88,7 @@ class User:
         #graph.create(Relationship(post, "ON", today_node))
         
         
-        today = Relationship(post, "ON", calendar.date(2017, 9, 23).day)
+        today = Relationship(post, "ON", calendar.date(today.year, today.month, today.day).day)
         graph.create(today)
         
         
