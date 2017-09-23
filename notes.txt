@@ -1,0 +1,2649 @@
+Reply from Bryce
+Hi,
+We don't offer a direct way to do this. Each workspace is completely separate from others, since these exist in different Docker containers. You could potentially look into creating a listener on ports 8080-8082 on the ctakes workspace that can fire off the bash script when hit.
+Alternately, you could use an SSH workspace as that will give you all the resources you need. For more info, see this community topic about extra large workspaces.
+Thank you,
+Bryce
+
+https://fearby.com/how-to-buy-a-new-domain-and-ssl-cert-from-namecheap-a-server-from-digital-ocean-and-configure-it/
+https://www.fullstackpython.com/nginx.html
+
+NAMECHEAP - PW details on lastpass
+
+DIGITALOCEAN - PW details on lastpass
+This is the server address
+https://cloud.digitalocean.com/droplets/60359758/graphs?i=70cc71
+
+This is the VM's IP
+46.101.26.198
+
+Installation Started
+
+Package Cloud9 IDE 1
+--------------------
+Python version 2.7 is required to install pty.js. Please install python 2.7 and try again. You can find more information on how to install Python in the docs: https://docs.c9.io/ssh_workspaces.html
+exiting with 1
+
+Failed Bash. Exit code 1
+
+One or more errors occured. Please try to resolve them and restart Cloud9 or contact support@c9.io.
+
+
+nb a new install of an unbuntu16.04 will not have python2.7 by default. It needs to be added manually
+watch this https://c9.io/blog/digitalocean
+then follow this https://docs.c9.io/docs/running-your-own-ssh-workspace
+
+excellent python3 DO tutorials
+todo https://www.digitalocean.com/community/tutorials/how-to-use-web-apis-in-python-3
+https://www.digitalocean.com/community/tutorials/how-to-use-the-machine-learning-one-click-install-image-on-digitalocean
+
+https://www.digitalocean.com/community/tutorials/how-to-ssh-securely-with-krypton
+ssh-import-id gh:paddy10tellys
+more ~/.ssh/authorized_keys 
+
+NB couldn't add my Kryptonite Pubkey to an Existing Droplet
+pmy@pmy-H61H2-M2 : ~
+[0] % ssh root@46.101.26.198                                          [10:27AM]
+no such identity: /home/pmy/.ssh/id_ed25519: No such file or directory
+no such identity: /home/pmy/.ssh/id_ecdsa: No such file or directory
+no such identity: /home/pmy/.ssh/id_dsa: No such file or directory
+Permission denied (publickey).
+
+went here https://www.ssh.com/ssh/keygen/
+pmy@pmy-H61H2-M2 : ~
+[1] % ssh-keygen -t ed25519                                           [11:06AM]
+Generating public/private ed25519 key pair.
+Enter file in which to save the key (/home/pmy/.ssh/id_ed25519): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/pmy/.ssh/id_ed25519.
+Your public key has been saved in /home/pmy/.ssh/id_ed25519.pub.
+The key fingerprint is:
+55:9e:4c:74:6e:ed:64:d2:8a:2b:d2:a0:12:91:4a:13 pmy@pmy-H61H2-M2
+The key's randomart image is:
++--[ED25519  256--+
+|  E        .+ .  |
+|   . .     = + o |
+|  o o     . + + =|
+| . o .   .   o * |
+|  . .   S   . . .|
+|     . . o   .   |
+|    . . . o .    |
+|     .   . .     |
+|                 |
++-----------------+
+
+pmy@pmy-H61H2-M2 : ~
+[0] % kr add root@46.101.26.198                                       [11:14AM]
+SSH public key copied to clipboard.
+Adding your SSH public key to root@46.101.26.198
+Kryptonite ▶ Requesting SSH authentication from phone
+Kryptonite ▶ Phone approval required. Respond using the Kryptonite app
+Kryptonite ▶ Success. Request Allowed ✔
+ 
+ pmy@pmy-H61H2-M2 : ~
+[0] % ssh root@46.101.26.198                                          [11:16AM]
+Kryptonite ▶ Requesting SSH authentication from phone
+Kryptonite ▶ Phone approval required. Respond using the Kryptonite app
+Kryptonite ▶ Success. Request Allowed ✔
+Welcome to Ubuntu 16.04.3 LTS (GNU/Linux 4.4.0-87-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  Get cloud support with Ubuntu Advantage Cloud Guest:
+    http://www.ubuntu.com/business/services/cloud
+
+0 packages can be updated.
+0 updates are security updates.
+
+
+*** System restart required ***
+Last login: Wed Aug 30 14:19:22 2017 from 130.211.94.9
+/usr/bin/xauth:  file /root/.Xauthority does not exist
+root@test:~# 
+
+
+NB re; the "/usr/bin/xauth:  file /root/.Xauthority does not exist" message - see https://ubuntuforums.org/showthread.php?t=1863739
+basically passing -X as an argument to ssh when you're connecting should be sufficient. i.e. 
+
+ssh -X myname@somehost     i.e.,     ssh -X root@46.101.26.198
+
+you'll get a 
+"/usr/bin/xauth: file /home/myname/.Xauthority does not exist" 
+but it will make one for you on the spot, then you can open up a graphic application from the remote machine, try "gedit" and all should go along smoothly.
+
+root@test:~# dpkg-reconfigure tzdata
+
+nb I got this error message
+
+perl: warning: Please check that your locale settings:
+	LANGUAGE = (unset),
+	LC_ALL = (unset),
+	LC_CTYPE = "en_GB.UTF-8",
+	LANG = "en_US.UTF-8"
+    are supported and installed on your system.
+perl: warning: Falling back to a fallback locale ("en_US.UTF-8").
+
+
+root@test:~# sudo vi /etc/default/locale
+
+tried rewriting /etc/default/locale to
+# Created by cloud-init v. 0.7.9 on Wed, 30 Aug 2017 14:04:27 +0000
+LANG=en_US.UTF-8
+LC_CTYPE="en_US.UTF-8"
+LC_ALL="en_US.UTF-8"
+
+
+
+root@test:~# sudo update-locale
+
+root@test:~# sudo locale-gen
+Generating locales (this might take a while)...
+  en_US.UTF-8... done
+Generation complete.
+
+If you are remotely connected to the Droplet over ssh (eg from my linux box) you need to set these variables on the machine you are connecting from:
+So in short all that was needed was to add the following to the ~/.bash_profile (~/.zshrc for me because I use oh my zsh)
+
+#fix for locale issues when connecting to ubuntu servers
+#https://www.digitalocean.com/community/questions/language-problem-on-ubuntu-14-04
+export LANG="en_US.utf8"
+export LANGUAGE="en_US.utf8"
+export LC_ALL="en_US.utf8"
+
+root@test:~# sudo apt-get install --reinstall language-pack-en
+
+root@test:~# sudo locale-gen
+
+root@test:~# locale
+LANG=en_US.UTF-8
+LANGUAGE=
+LC_CTYPE=en_GB.UTF-8
+LC_NUMERIC="en_US.UTF-8"
+LC_TIME="en_US.UTF-8"
+LC_COLLATE="en_US.UTF-8"
+LC_MONETARY="en_US.UTF-8"
+LC_MESSAGES="en_US.UTF-8"
+LC_PAPER="en_US.UTF-8"
+LC_NAME="en_US.UTF-8"
+LC_ADDRESS="en_US.UTF-8"
+LC_TELEPHONE="en_US.UTF-8"
+LC_MEASUREMENT="en_US.UTF-8"
+LC_IDENTIFICATION="en_US.UTF-8"
+LC_ALL=
+
+NB on local machine i.e., my linux box
+pmy@pmy-H61H2-M2 : ~
+[255] % ls /home/pmy/.ssh                                             [ 3:42PM]
+config       id_ed25519      id_kryptonite.pub  id_rsa.pub
+config.bak1  id_ed25519.pub  id_rsa             known_hosts
+
+
+
+Option 2: Manually Install the Key
+Assuming you generated an SSH key pair using the previous step, use the following command at the terminal of your local machine to print your public key (id_rsa.pub):
+
+pmy@pmy-H61H2-M2 : ~
+[0] % cat ~/.ssh/id_kryptonite.pub  
+
+Select the public key, and copy it to clipboard
+
+To enable the use of SSH key to authenticate as the new remote user, you must add the public key to a special file in the user's home directory pmy e.g., pmy@test on DO.
+
+On the server, as the root user, enter the following command to temporarily switch to the new user 
+su - pmy@test
+
+Now you will be in your new user's home directory on the droplet/on the server called 'test'.
+
+Create a new directory called .ssh and restrict its permissions with the following commands:
+
+mkdir ~/.ssh
+chmod 700 ~/.ssh
+Now open a file in .ssh called authorized_keys with a text editor. 
+
+vi ~/.ssh/authorized_keys
+Now insert your public key (which should be in your clipboard) by pasting it into the editor.
+
+Hit CTRL-x to exit the file, then y to save the changes that you made, then ENTER to confirm the file name.
+
+Now restrict the permissions of the authorized_keys file with this command:
+
+chmod 600 ~/.ssh/authorized_keys
+Type this command once to return to the root user:
+
+exit
+Now your public key is installed, and you can use SSH keys to log in as your user.
+
+
+
+pmy@test:~$ pwd
+/home/pmy
+pmy@test:~$ vi /etc/ssh/sshd_config
+
+1/9/17
+
+build a webserver in a docker see - https://martinfowler.com/articles/serverless.html and https://www.fullstackpython.com/docker.html
+
+BEST CHOICE? - https://ianlondon.github.io/blog/deploy-flask-docker-nginx/
+
+virtualenv & docker - see https://hynek.me/articles/virtualenv-lives/ and http://timothybramlett.com/docker_tutorial_for_python_apps.html
+
+Docker works by utilizing a Dockerfile to create images. Those images are used to spin up containers that host and run the application. The application can then be exposed
+by using an IP address, so it can be accessed from outside the container.
+
+Docker containers wrap up a piece of software in a complete filesystem that contains everything it needs to run: code, runtime, system tools, system
+libraries – anything you can install on a server. This guarantees that it will always run the same, regardless of the environment it is running in.
+
+– from What Is Docker?     see - https://www.duckademy.com/course/docker
+
+https://www.smartfile.com/blog/dockerizing-a-python-flask-application/
+
+neo4j - https://neo4j.com/developer/docker/ and https://hub.docker.com/r/thetallgrassnet/alpine-neo4j/
+
+
+nb use AUTH0 for logins... tutorial - https://auth0.com/docs/quickstart/webapp/python/01-login
+
+nb use twilio for messaging - see https://www.youtube.com/watch?v=uzBRycRYsqw
+
+nb implement the AI as FaaS
+start here - https://blog.alexellis.io/introducing-functions-as-a-service/
+
+nb xml processing
+see here - https://www.youtube.com/watch?v=rFxXDO8-keg
+
+Faas - stateless, short-lived, emphemeral processes that come & go in the context of a cloud. Useful, Fast, elastic scaling
+scaling is automatically managed, transparent, and fine grained. Container platforms & PaaS do not yet offer such a solution
+Cost-efficient when dealing with
+
+Many examples of serverless FaaS are ‘stored Procedures as a Service’ but actually Faas is much more than just wrapping acess to the database
+see - https://martinfowler.com/articles/serverless.html
+~~~~~~~~~~~~~~~~~~
+NB THE FOLLOWING WAS FROM C9 WHILE ROOT
+WSGI is web server gateway interface - inteface specification (how to connect webservers to framework)
+mod_wsgi is an Apache module - allows apache to host python web apps
+
+root@test:~# apt-get update
+
+root@test:~# sudo apt-get install python-dev python-pip git docker.io
+
+cat ~/.ssh/authorized_keys >> /home/pmy/.ssh/authorized_keys
+
+root@test:~# more /home/pmy/.ssh/authorized_keys
+
+root@test:~# chown -R pmy:pmy /home/pmy/.ssh
+
+root@test:~# restart ssh
+The program 'restart' is currently not installed. You can install it by typing:
+apt install upstart
+
+root@test:~# apt install upstart
+restart: Unable to connect to Upstart: Failed to connect to socket /com/ubuntu/upstart: Connection refused
+
+nb From Ubuntu 15.04, systemd is now the default init process instead of Upstart, and as a result some commands have changed.
+
+root@test:~# systemctl restart ssh
+
+changed username & initial path from root & /root to pmy & /home/pmy
+
+just need to give pmy a sudo pw now
+
+root@test:~# passwd pmy
+Enter new UNIX password: 
+Retype new UNIX password: 
+passwd: password updated successfully
+root@test:~# cp notes.txt /home/pmy
+
+NB THE FOLLOWING WAS FROM C9 WHILE PMY
+pmy@test:~$ whoami
+pmy
+pmy@test:~$ pwd
+/home/pmy
+
+
+pmy@test:~$ whoami
+pmy
+pmy@test:~$ pwd
+/home/pmy
+pmy@test:~$ sudo chown pmy:root notes.txt
+[sudo] password for pmy: 
+
+Virtual environments offer a way for managing and isolating dependencies on a per-project basis. Moreover, they also avoid
+the whole sudo pip install situation, which is a security risk as explained in https://askubuntu.com/a/802594/15003.
+The official Python documentation also encourages the use of virtual environments. The easiest way to create and use virtual
+environments for both Python 2 and Python 3 is to install virtualenv & use a virtualenv for each Python project.
+After activation, use pip to install Python packages as usual; NEVER USE SUDO in a virtualenv, if possible
+note that there is no need to use pip3 for Python 3.
+See https://askubuntu.com/questions/802544/is-sudo-pip-install-still-a-broken-practice?noredirect=1&lq=1
+
+INSTALL VIRTUALENVWRAPPER
+nb read https://virtualenvwrapper.readthedocs.io/en/latest/
+
+pmy@test:~$ pip install virtualenvwrapper
+pmy@test:~$ Successfully installed pbr six stevedore virtualenv virtualenv-clone virtualenvwrapper
+You are using pip version 8.1.1, however version 9.0.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+pmy@test:~$ pip install --upgrade pip
+Successfully installed pip-9.0.1
+
+pmy@test:~$ source virtualenvwrapper.sh
+
+pmy@test:~$ mkvirtualenv -- venv
+New python executable in /home/pmy/.virtualenvs/venv/bin/python
+
+(venv) pmy@test:~$ export WORKON_HOME=$HOME/.virtualenvs
+(venv) pmy@test:~$ echo $WORKON_HOME
+/home/pmy/.virtualenvs
+
+(venv) pmy@test:~$ find -iname "virtualenv" | grep bin
+./.local/bin/virtualenv
+
+(venv) pmy@test:~$ which virtualenv
+/home/pmy/.local/bin/virtualenv
+(venv) pmy@test:~$ 
+
+(venv) pmy@test:~$ python -V
+Python 2.7.12
+
+(venv) pmy@test:~$ sudo apt-get install python3.4
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Note, selecting 'libpython3.4-minimal' for regex 'python3.4'
+0 upgraded, 0 newly installed, 0 to remove and 2 not upgraded.
+(venv) pmy@test:~$ which python -V
+/home/pmy/.virtualenvs/venv/bin/python
+
+(venv) pmy@test:~$ python -V
+Python 2.7.12
+(venv) pmy@test:~$ python3 -V
+Python 3.5.2
+
+CHECK ENVIRONMENT VARIABLES
+see just exported environment variables, use declare -px:
+https://askubuntu.com/questions/755109/list-all-environment-variables-and-show-if-they-are-exported-or-not
+
+declare: usage: declare [-aAfFgilnrtux] [-p] [name[=value] ...]
+(venv) pmy@test:~$ declare -px
+
+(venv) pmy@test:~$ lsvirtualenv
+venv
+====
+
+
+(venv) pmy@test:~$ 
+
+(venv) pmy@test:~$ sudo apt-get update && sudo apt-get -y upgrade
+
+(venv) pmy@test:~$ curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+
+gives this warning ## Run `apt-get install nodejs` (as root) to install Node.js v4.x LTS Argon and npm
+
+(venv) pmy@test:~$ sudo apt-get install -y nodejs
+
+(venv) pmy@test:~$ npm -v
+2.15.11
+
+(venv) pmy@test:~$ sudo npm install -g c9
+/usr/bin/c9 -> /usr/lib/node_modules/c9/bin/c9
+c9@3.1.3534 /usr/lib/node_modules/c9
+
+
+Make a file requirements.txt that has all your dependencies in it. For the simplest flask app, all you need is the line: Flask==0.11.1
+(venv) pmy@test:~$ c9 open requirements.txt
+
+(venv) pmy@test:~$ pip install -r requirements.txt
+NB Stored in directory: /home/pmy/.cache/pip/wheels/fc/a8/66/24d655233c757e178d45dea2de22a04c6d92766abfb741129a
+
+
+(venv) pmy@test:~$ ls /home/pmy/.cache/pip/wheels/88/a7/30/e39a54a87bcbe25308fa3ca64e8ddc75d9b3e5afa21ee32d57
+MarkupSafe-1.0-cp27-cp27mu-linux_x86_64.whl
+
+2/9/17
+followed https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04 as fas as optional add user to docker group
+This uninstalled docker.io & installed docker-ce
+
+https://stackoverflow.com/questions/45023363/what-is-docker-io-in-relation-to-docker-ce-and-docker-ee
+
+Uninstall the Docker CE package:
+
+$ sudo apt-get purge docker-ce
+Images, containers, volumes, or customized configuration files on your host are not automatically removed. To delete all images, containers, and volumes:
+
+$ sudo rm -rf /var/lib/docker
+
+Reinstall the docker.io package 
+(venv) pmy@test:~$ sudo apt-get install docker.io 
+
+	
+If you are looking for a specific container, you can run:
+
+docker inspect -f '{{.State.Running}}' $container_name
+If you want to know if dockerd is running itself on the local machine and you have systemd installed, you can run:
+
+
+(venv) pmy@test:~$ systemctl show --property ActiveState docker
+ActiveState=active
+
+You can also connect to docker with docker info or docker version and they will error out if the daemon is unavailable.
+
+(venv) pmy@test:~$ docker version
+Client:
+ Version:      1.12.6
+ API version:  1.24
+ Go version:   go1.6.2
+ Git commit:   78d1802
+ Built:        Tue Jan 31 23:35:14 2017
+ OS/Arch:      linux/amd64
+Cannot connect to the Docker daemon. Is the docker daemon running on this host?
+
+In Linux:
+
+From Create a Docker group section, it is necessary to add the user to the docker group:
+
+sudo usermod -aG docker $(whoami)
+
+Linux
+
+To run docker daemon on Linux (from CLI), try running:
+
+$ sudo service docker start
+
+(venv) pmy@test:~$ sudo docker info
+Containers: 0
+ Running: 0
+ Paused: 0
+ Stopped: 0
+Images: 0
+Server Version: 1.12.6
+Storage Driver: aufs
+ Root Dir: /var/lib/docker/aufs
+ Backing Filesystem: extfs
+ Dirs: 0
+ Dirperm1 Supported: true
+Logging Driver: json-file
+Cgroup Driver: cgroupfs
+Plugins:
+ Volume: local
+ Network: host bridge overlay null
+Swarm: inactive
+Runtimes: runc
+Default Runtime: runc
+Security Options: apparmor seccomp
+Kernel Version: 4.4.0-87-generic
+Operating System: Ubuntu 16.04.3 LTS
+OSType: linux
+Architecture: x86_64
+CPUs: 1
+Total Memory: 488.3 MiB
+Name: test
+ID: ONNM:CZEU:A7MX:VTAU:PWQZ:CUBJ:4MKW:3U77:AAKN:S72I:XC2N:IOU4
+Docker Root Dir: /var/lib/docker
+Debug Mode (client): false
+Debug Mode (server): false
+Registry: https://index.docker.io/v1/
+WARNING: No swap limit support
+Insecure Registries:
+ 127.0.0.0/8
+ 
+NB in a different terminal
+pmy@test:~$ sudo systemctl status docker
+[sudo] password for pmy: 
+● docker.service - Docker Application Container Engine
+   Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+   Active: active (running) since Sat 2017-09-02 17:52:09 BST; 2min 29s ago
+     Docs: https://docs.docker.com
+ Main PID: 11688 (dockerd)
+    Tasks: 16
+   Memory: 22.5M
+      CPU: 631ms
+   CGroup: /system.slice/docker.service
+           ├─11688 /usr/bin/dockerd -H fd://
+           └─11694 containerd -l unix:///var/run/docker/libcontainerd/docker-containerd.sock --shim containerd-shim --metrics-interval=0 --start-timeout 2m --state-dir /var/run/docker/libcontainerd/containerd --runtime
+
+Sep 02 17:52:08 test dockerd[11688]: time="2017-09-02T17:52:08.728311380+01:00" level=info msg="Graph migration to content-addressability took 0.00 seconds"
+Sep 02 17:52:08 test dockerd[11688]: time="2017-09-02T17:52:08.730399804+01:00" level=warning msg="Your kernel does not support swap memory limit."
+Sep 02 17:52:08 test dockerd[11688]: time="2017-09-02T17:52:08.734184093+01:00" level=info msg="Loading containers: start."
+Sep 02 17:52:08 test dockerd[11688]: time="2017-09-02T17:52:08.750392519+01:00" level=info msg="Firewalld running: false"
+Sep 02 17:52:08 test dockerd[11688]: time="2017-09-02T17:52:08.949196998+01:00" level=info msg="Default bridge (docker0) is assigned with an IP address 172.17.0.0/16. Daemon option --bip can be used to set a preferred 
+Sep 02 17:52:09 test dockerd[11688]: time="2017-09-02T17:52:09.011541277+01:00" level=info msg="Loading containers: done."
+Sep 02 17:52:09 test dockerd[11688]: time="2017-09-02T17:52:09.012640474+01:00" level=info msg="Daemon has completed initialization"
+Sep 02 17:52:09 test dockerd[11688]: time="2017-09-02T17:52:09.013115271+01:00" level=info msg="Docker daemon" commit=78d1802 graphdriver=aufs version=1.12.6
+Sep 02 17:52:09 test systemd[1]: Started Docker Application Container Engine.
+Sep 02 17:52:09 test dockerd[11688]: time="2017-09-02T17:52:09.086142091+01:00" level=info msg="API listen on /var/run/docker.sock"
+lines 1-22/22 (END)
+
+
+
+
+(venv) pmy@test:~$ docker run ubuntu:16.04 sudo echo foo
+docker: Cannot connect to the Docker daemon. Is the docker daemon running on this host?.
+See 'docker run --help'.
+(venv) pmy@test:~$ docker run --help
+
+Usage:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+Run a command in a new container
+
+Options:
+      --add-host value              Add a custom host-to-IP mapping (host:ip) (default [])
+  -a, --attach value                Attach to STDIN, STDOUT or STDERR (default [])
+      --blkio-weight value          Block IO (relative weight), between 10 and 1000
+      --blkio-weight-device value   Block IO weight (relative device weight) (default [])
+      --cap-add value               Add Linux capabilities (default [])
+      --cap-drop value              Drop Linux capabilities (default [])
+      --cgroup-parent string        Optional parent cgroup for the container
+      --cidfile string              Write the container ID to the file
+      --cpu-percent int             CPU percent (Windows only)
+      --cpu-period int              Limit CPU CFS (Completely Fair Scheduler) period
+      --cpu-quota int               Limit CPU CFS (Completely Fair Scheduler) quota
+  -c, --cpu-shares int              CPU shares (relative weight)
+      --cpuset-cpus string          CPUs in which to allow execution (0-3, 0,1)
+      --cpuset-mems string          MEMs in which to allow execution (0-3, 0,1)
+  -d, --detach                      Run container in background and print container ID
+      --detach-keys string          Override the key sequence for detaching a container
+      --device value                Add a host device to the container (default [])
+      --device-read-bps value       Limit read rate (bytes per second) from a device (default [])
+      --device-read-iops value      Limit read rate (IO per second) from a device (default [])
+      --device-write-bps value      Limit write rate (bytes per second) to a device (default [])
+      --device-write-iops value     Limit write rate (IO per second) to a device (default [])
+      --disable-content-trust       Skip image verification (default true)
+      --dns value                   Set custom DNS servers (default [])
+      --dns-opt value               Set DNS options (default [])
+      --dns-search value            Set custom DNS search domains (default [])
+      --entrypoint string           Overwrite the default ENTRYPOINT of the image
+  -e, --env value                   Set environment variables (default [])
+      --env-file value              Read in a file of environment variables (default [])
+      --expose value                Expose a port or a range of ports (default [])
+      --group-add value             Add additional groups to join (default [])
+      --health-cmd string           Command to run to check health
+      --health-interval duration    Time between running the check
+      --health-retries int          Consecutive failures needed to report unhealthy
+      --health-timeout duration     Maximum time to allow one check to run
+      --help                        Print usage
+  -h, --hostname string             Container host name
+  -i, --interactive                 Keep STDIN open even if not attached
+      --io-maxbandwidth string      Maximum IO bandwidth limit for the system drive (Windows only)
+      --io-maxiops uint             Maximum IOps limit for the system drive (Windows only)
+      --ip string                   Container IPv4 address (e.g. 172.30.100.104)
+      --ip6 string                  Container IPv6 address (e.g. 2001:db8::33)
+      --ipc string                  IPC namespace to use
+      --isolation string            Container isolation technology
+      --kernel-memory string        Kernel memory limit
+  -l, --label value                 Set meta data on a container (default [])
+      --label-file value            Read in a line delimited file of labels (default [])
+      --link value                  Add link to another container (default [])
+      --link-local-ip value         Container IPv4/IPv6 link-local addresses (default [])
+      --log-driver string           Logging driver for the container
+      --log-opt value               Log driver options (default [])
+      --mac-address string          Container MAC address (e.g. 92:d0:c6:0a:29:33)
+  -m, --memory string               Memory limit
+      --memory-reservation string   Memory soft limit
+      --memory-swap string          Swap limit equal to memory plus swap: '-1' to enable unlimited swap
+      --memory-swappiness int       Tune container memory swappiness (0 to 100) (default -1)
+      --name string                 Assign a name to the container
+      --network string              Connect a container to a network (default "default")
+      --network-alias value         Add network-scoped alias for the container (default [])
+      --no-healthcheck              Disable any container-specified HEALTHCHECK
+      --oom-kill-disable            Disable OOM Killer
+      --oom-score-adj int           Tune host's OOM preferences (-1000 to 1000)
+      --pid string                  PID namespace to use
+      --pids-limit int              Tune container pids limit (set -1 for unlimited)
+      --privileged                  Give extended privileges to this container
+  -p, --publish value               Publish a container's port(s) to the host (default [])
+  -P, --publish-all                 Publish all exposed ports to random ports
+      --read-only                   Mount the container's root filesystem as read only
+      --restart string              Restart policy to apply when a container exits (default "no")
+      --rm                          Automatically remove the container when it exits
+      --runtime string              Runtime to use for this container
+      --security-opt value          Security Options (default [])
+      --shm-size string             Size of /dev/shm, default value is 64MB
+      --sig-proxy                   Proxy received signals to the process (default true)
+      --stop-signal string          Signal to stop a container, SIGTERM by default (default "SIGTERM")
+      --storage-opt value           Storage driver options for the container (default [])
+      --sysctl value                Sysctl options (default map[])
+      --tmpfs value                 Mount a tmpfs directory (default [])
+  -t, --tty                         Allocate a pseudo-TTY
+      --ulimit value                Ulimit options (default [])
+  -u, --user string                 Username or UID (format: <name|uid>[:<group|gid>])
+      --userns string               User namespace to use
+      --uts string                  UTS namespace to use
+  -v, --volume value                Bind mount a volume (default [])
+      --volume-driver string        Optional volume driver for the container
+      --volumes-from value          Mount volumes from the specified container(s) (default [])
+  -w, --workdir string              Working directory inside the container
+(venv) pmy@test:~$ sudo docker run -i -t ubuntu /bin/bash
+Unable to find image 'ubuntu:latest' locally
+latest: Pulling from library/ubuntu
+d5c6f90da05d: Pull complete 
+1300883d87d5: Pull complete 
+c220aa3cfc1b: Pull complete 
+2e9398f099dc: Pull complete 
+dc27a084064f: Pull complete 
+Digest: sha256:34471448724419596ca4e890496d375801de21b0e67b81a77fd6155ce001edad
+Status: Downloaded newer image for ubuntu:latest
+root@d7b6797ba3bc:/# FROM tiangolo/uwsgi-nginx-flask:flask
+
+COPY ./app /app
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+REBOOTED TO START AGAIN - SEE http://timothybramlett.com/docker_tutorial_for_python_apps.html
+pmy@test:~$ source virtualenvwrapper.sh
+pmy@test:~$ lsvirtualenv
+venv
+====
+
+pmy@test:~$ workon venv
+(venv) pmy@test:~$ sudo rm -rf /var/lib/docker
+
+(venv) pmy@test:~$ more requirements.txt
+Flask==0.11.1
+(venv) pmy@test:~$ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+
+(venv) pmy@test:~$ docker run -i -t ubuntu:14.04 /bin/bash  #  i for interactive, t for terminal, loads the ubuntu14.04 image
+
+root@b8234615344e:/# exit
+exit
+
+(venv) pmy@test:~$ docker run -it ubuntu:14.04 bash  # does the same as the above
+
+
+root@64dfe01cc729:/# which python
+
+root@64dfe01cc729:/# apt-get update 
+[EDITED...  python2.7 python2.7-minimal
+Suggested packages: ...
+After this operation, 16.0 MB of additional disk space will be used [END]
+
+(venv) pmy@test:~$ docker login
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+Username: paddy10tellys
+Password: nb LastPass
+Login Succeeded
+
+(venv) pmy@test:~$ docker commit 64dfe01cc729  python1:1.0
+sha256:a77180cc2e026cc6059b951ab36e2af195da778c70c4ac76378c75b38f5dad88
+
+
+(venv) pmy@test:~$ docker run -it a77180cc2e02  # And now you should be able to use Python from within your new image!
+
+root@03a3091e0747:/# which python
+/usr/bin/python
+
+root@03a3091e0747:/# python -V
+Python 2.7.6
+
+root@03a3091e0747:/# python3 -V
+Python 3.4.3
+
+(venv) pmy@test:~$ docker images
+REPOSITORY                               TAG                 IMAGE ID            CREATED             SIZE
+python1                                  1.0                 a77180cc2e02        11 hours ago        233MB
+<none>                                   <none>              31c0b582713d        11 hours ago        233MB
+ubuntu                                   14.04               c69811d4e993        3 weeks ago         188MB
+hello-world                              latest              1815c82652c0        2 months ago        1.84kB
+pakali/python-flask-docker-hello-world   latest              af4f22503a27        17 months ago       400MB
+
+
+
+
+
+
+
+
+nb what goes in a requirements.txt?
+virtualenv and pip make great companions, especially when you use the requirements feature of pip. Each project you work on has its own requirements.txt file, 
+you can use this to install the dependencies for that project into its virtual environment:
+
+env/bin/pip install -r requirements.txt
+
+See the pip documentation for more details.
+
+3/9/17
+Much confusion & hair-splitting obfuscates what cloud computing actually is...
+
+DO provides users with a VPS (virtual private server) using KVM (kernal virtualization machine)
+
+KVM is a virtualization infrastructure for the Linux kernel that turns it into a hypervisor
+
+A hypervisor is just software that creates & runs VM's
+
+DO sells standard vps servers with a very flexible provisioning and billing. It is a reseller (IT as a utility cf gas/electricity providers)
+
+There are different types of VPS solutions, e.g., openvz type of VPS differs from a hypervisor type of VPS
+
+In particular, openvz/virtuozzo VPS uses shared OS kernels 
+
+Whereas xen/kvm/vmware type of VPS uses independent OS installs across commodity infrastructure
+
+DO uses this 2nd type of VPS (independant OS installs), combines it with utility delivery, billing, automation & markets it as cloud computing - fair enough
+
+Running a web server only needs a few processes
+
+Docker packages these up into a container
+
+No need to duplicate the whole OS
+
+The docker host then allocates resources from the underlying OS to the container prn
+
+A docker image creates such a container
+
+A docker image is made with a dockerfile
+
+The dockerfile defines the components needed to build a docker image
+
+The dockerfile is a list of commands needed to build a docker image
+
+The docker client contacts the docker daemon to request a docker image
+
+The docker daemon looks for a local copy of the requested image
+
+If there is no local copy then the docker daemon requests & downloads one from docker hub
+
+The docker daemon creates a new container from the downloaded image
+
+The image executes
+
+The docker daemon streams the output to the docker client
+
+The docker client sends the output to the terminal
+
+
+
+See http://timothybramlett.com/docker_tutorial_for_python_apps.html
+
+Run the following command to install Docker:
+
+$ wget -qO- https://get.docker.com/ | sh
+downloads a text file that consists of a series of bash commands from the url above and then pipes the contents of that text file into the sh interpreter
+nb ‘-O file’
+‘--output-document=file’
+    concatenates to file
+nb ‘-q’
+‘--quiet’
+    turns off Wget’s output 
+    
+    
+3/9/17
+
+(venv) pmy@test:~$ docker images
+REPOSITORY                               TAG                 IMAGE ID            CREATED             SIZE
+python1                                  1.0                 a77180cc2e02        17 hours ago        233MB
+ubuntu                                   14.04               c69811d4e993        3 weeks ago         188MB
+hello-world                              latest              1815c82652c0        2 months ago        1.84kB
+pakali/python-flask-docker-hello-world   latest              af4f22503a27        17 months ago       400MB
+
+If you have multiples docker containers launched, use this to force them to stop
+$ docker rm -f $(docker ps -aq)
+
+And similar for all images:
+docker rmi -f $(docker images -q)
+
+(venv) pmy@test:~$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+
+(venv) pmy@test:~$ git clone https://github.com/TimothyBramlett/python-flask-docker-hello-world.git
+Cloning into 'python-flask-docker-hello-world'...
+remote: Counting objects: 24, done.
+remote: Total 24 (delta 0), reused 0 (delta 0), pack-reused 24
+Unpacking objects: 100% (24/24), done.
+Checking connectivity... done.
+
+(venv) pmy@test:~$ ls
+notes.txt  python-flask-docker-hello-world  requirements.txt
+
+git clone command is used to pull a copy (a clone) from an existing git repository. By default it creates a folder in the folder you execute 
+it from that has a .git folder in it. The folder the cloning creates is your working copy and the .git folder is your local copy of the repository
+
+(venv) pmy@test:~/python-flask-docker-hello-world$ rm -R -f .git
+
+then renamed it to endovelicus
+
+go to github & create a new repo called endovelicus
+
+back here do:
+
+(venv) pmy@test:~/python-flask-docker-hello-world$ git init
+Initialized empty Git repository in /home/pmy/endovelicus/.git/
+
+(venv) pmy@test:~/python-flask-docker-hello-world$ git add .
+
+(venv) pmy@test:~/python-flask-docker-hello-world$ git commit -m 'initial project version'
+[master (root-commit) 5a5c3d5] initial project version
+ 4 files changed, 37 insertions(+)
+ create mode 100644 Dockerfile
+ create mode 100644 README.md
+ create mode 100644 app.py
+ create mode 100644 requirements.txt
+(venv) pmy@test:~/python-flask-docker-hello-world$ git remote add origin https://github.com/paddy10tellys/endovelicus.git
+(venv) pmy@test:~/python-flask-docker-hello-world$ git push -u origin master
+Username for 'https://github.com': paddy10tellys@googlemail.com
+Password for 'https://paddy10tellys@googlemail.com@github.com': 
+Counting objects: 6, done.
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (6/6), 951 bytes | 0 bytes/s, done.
+Total 6 (delta 0), reused 0 (delta 0)
+To https://github.com/paddy10tellys/endovelicus.git
+ * [new branch]      master -> master
+Branch master set up to track remote branch master from origin.
+
+edit Dockerfile to to update maintainers email address to my email address
+
+(venv) pmy@test:~/python-flask-docker-hello-world$ git add Dockerfile
+
+(venv) pmy@test:~/python-flask-docker-hello-world$ git commit -m "edited Dockerfile to to update maintainers email address to my email address"                                                                         
+[master 7190682] edited Dockerfile to to update maintainers email address to my email address
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+(venv) pmy@test:~/python-flask-docker-hello-world$ git push -u origin master
+Username for 'https://github.com': paddy10tellys@googlemail.com
+Password for 'https://paddy10tellys@googlemail.com@github.com': 
+Counting objects: 3, done.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 431 bytes | 0 bytes/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/paddy10tellys/endovelicus.git
+   5a5c3d5..7190682  master -> master
+Branch master set up to track remote branch master from origin.
+
+close this terminal because it still says (venv) pmy@test:~/python-flask-docker-hello-world$
+
+open another one in endovelicus folder then make another change & see what happens...
+
+pmy@test:~/endovelicus$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   app.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+pmy@test:~/endovelicus$ git add app.py
+pmy@test:~/endovelicus$ git commit -m "renamed hello() function inside app.py to index()"
+[master 28e036b] renamed hello() function inside app.py to index()
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+pmy@test:~/endovelicus$ git push origin master
+Username for 'https://github.com': paddy10tellys@googlemail.com
+Password for 'https://paddy10tellys@googlemail.com@github.com': 
+Counting objects: 3, done.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 324 bytes | 0 bytes/s, done.
+Total 3 (delta 2), reused 0 (delta 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/paddy10tellys/endovelicus.git
+   7190682..28e036b  master -> master
+pmy@test:~/endovelicus$ 
+
+NB IN THE SCENARIO WHERE OTHER PEOPLE HAVE PUSHED CHANGES TO THE REPO...
+
+    Update your local repo from the remote (but don't merge):
+
+    git fetch
+
+    After downloading the updates, let's see the differences:
+
+    git diff master origin/master
+
+    If you're happy with those updates, then merge:
+
+    git rebase
+    
+pmy@test:~/endovelicus$ cd ..
+
+pmy@test:~$ pwd
+/home/pmy
+
+pmy@test:~$ ls
+endovelicus  notes.txt
+
+pmy@test:~$ rm -R endovelicus
+
+THIS REMOVED IT
+NEXT I CLONED IT & ALTERED SOME FILES
+
+altered app.py & the run instructions in README.md to reflect renaming of app to endovelicus.app
+
+NB after I uploaded I noticed that the the link was incorrect e.g., it was http://46.101.26.198:5000/:5000
+So I altered it in github (equiv to someone else uploading to the repo from elsewhere) to http://46.101.26.198:5000
+and then did a fetch-diff-rebase so it's right locally now as well...
+
+pmy@test:~/endovelicus$ git fetch
+remote: Counting objects: 3, done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 3 (delta 2), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/paddy10tellys/endovelicus
+   7c92176..abd02cf  master     -> origin/master
+pmy@test:~/endovelicus$ git diff origin/master
+diff --git a/README.md b/README.md
+index 1b4e44b..380e325 100644
+--- a/README.md
++++ b/README.md
+@@ -12,4 +12,4 @@ Run the Docker container using the command shown below.
+ $ docker run -d -p 5000:5000 endovelicus-app
+ ```
+ 
+-The application will be accessible at http://46.101.26.198:5000 or if you are using boot2docker then first find ip address using `$ boot2docker ip` and the use the ip `http://<host_ip>:5000`
++The application will be accessible at http://46.101.26.198:5000/:5000 or if you are using boot2docker then first find ip address using `$ boot2docker ip` and the use the ip `http://<host_ip>:5000`
+pmy@test:~/endovelicus$ git rebase
+First, rewinding head to replay your work on top of it...
+Fast-forwarded master to refs/remotes/origin/master  # SORTED IT OUT
+
+YOU CAN LIST THE PYTHON PACKAGES USED BY A CONTAINER WITH docker exec <container ID> pip list
+
+pmy@test:~/endovelicus$ docker exec 30c034aea7eb pip list                                                                                                                                                 
+argparse (1.2.1)
+chardet (2.0.1)
+click (6.7)
+colorama (0.2.5)
+Flask (0.12.2)
+html5lib (0.999)
+itsdangerous (0.24)
+Jinja2 (2.9.6)
+MarkupSafe (1.0)
+pip (1.5.4)
+requests (2.2.1)
+setuptools (3.3)
+six (1.5.2)
+urllib3 (1.7.1)
+Werkzeug (0.12.2)
+wheel (0.24.0)
+wsgiref (0.1.2)
+
+YOU CAN LIST PACKAGES IN THE VIRTUALENV WITH pip freeze --local or pip list --local
+pmy@test:~/endovelicus$ pip list
+DEPRECATION: The default format will switch to columns in the future. You can use --format=(legacy|columns) (or define a format=(legacy|columns) in your pip.conf under the [list] section) to disable this warning.
+pbr (3.1.1)
+pip (9.0.1)
+setuptools (20.7.0)
+six (1.10.0)
+stevedore (1.25.0)
+virtualenv (15.1.0)
+virtualenv-clone (0.2.6)
+virtualenvwrapper (4.7.2)
+wheel (0.29.0)
+pmy@test:~/endovelicus$ pip freeze
+pbr==3.1.1
+six==1.10.0
+stevedore==1.25.0
+virtualenv==15.1.0
+virtualenv-clone==0.2.6
+virtualenvwrapper==4.7.2
+
+YOU CAN INSPECT THE CONTAINER WITH  docker container inspect <container ID>
+pmy@test:~/endovelicus$ docker container inspect 30c034aea7eb 
+[
+    {
+        "Id": "30c034aea7eb232350ccffaf17343fe7d7004bd68aebd0f310fc31175701afe5",
+        "Created": "2017-09-03T14:55:52.358049609Z",
+        "Path": "python",
+        "Args": [
+            "app.py"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 20456,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2017-09-03T14:55:52.84246204Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:9b81b7c7e6005ac22ea0a94caf65319b27a873578089b98e51fbca07d6a060e6",
+        "ResolvConfPath": "/var/lib/docker/containers/30c034aea7eb232350ccffaf17343fe7d7004bd68aebd0f310fc31175701afe5/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/30c034aea7eb232350ccffaf17343fe7d7004bd68aebd0f310fc31175701afe5/hostname",
+        "HostsPath": "/var/lib/docker/containers/30c034aea7eb232350ccffaf17343fe7d7004bd68aebd0f310fc31175701afe5/hosts",
+        "LogPath": "/var/lib/docker/containers/30c034aea7eb232350ccffaf17343fe7d7004bd68aebd0f310fc31175701afe5/30c034aea7eb232350ccffaf17343fe7d7004bd68aebd0f310fc31175701afe5-json.log",
+        "Name": "/vibrant_carson",
+        "RestartCount": 0,
+        "Driver": "aufs",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "docker-default",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "default",
+            "PortBindings": {
+                "5000/tcp": [
+                    {
+                        "HostIp": "",
+                        "HostPort": "5000"
+                    }
+                ]
+            },
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "CapAdd": null,
+            "CapDrop": null,
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DiskQuota": 0,
+            "KernelMemory": 0,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": false,
+            "PidsLimit": 0,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0
+        },
+        "GraphDriver": {
+            "Data": null,
+            "Name": "aufs"
+        },
+        "Mounts": [],
+        "Config": {
+            "Hostname": "30c034aea7eb",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "5000/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": [
+                "app.py"
+            ],
+            "ArgsEscaped": true,
+            "Image": "endovelicus-app",
+            "Volumes": null,
+            "WorkingDir": "/app",
+            "Entrypoint": [
+                "python"
+            ],
+            "OnBuild": null,
+            "Labels": {}
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "e99d29bcbc7e0462fdadc8c8dee3b3b564b17f8c394db6e386fb0dc630be8776",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {
+                "5000/tcp": [
+                    {
+                        "HostIp": "0.0.0.0",
+                        "HostPort": "5000"
+                    }
+                ]
+            },
+            "SandboxKey": "/var/run/docker/netns/e99d29bcbc7e",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "6d3b1eb01117f2184fa24b75b5124859b7f4ef1d71b39e8dc6e4a78e6cb74163",
+            "Gateway": "172.17.0.1",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "172.17.0.2",
+            "IPPrefixLen": 16,
+            "IPv6Gateway": "",
+            "MacAddress": "02:42:ac:11:00:02",
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "2ad0a54ce06471aa32db4b79570289e448ff4f6fbc347f0807a6065c44b6265d",
+                    "EndpointID": "6d3b1eb01117f2184fa24b75b5124859b7f4ef1d71b39e8dc6e4a78e6cb74163",
+                    "Gateway": "172.17.0.1",
+                    "IPAddress": "172.17.0.2",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:11:00:02",
+                    "DriverOpts": null
+                }
+            }
+        }
+    }
+]
+
+
+See https://github.com/docker/compose/issues/3038
+docker build -t MYCONTAINER git@github.com:myrepo/myrepo.git#master 
+pmy@test:~$ docker build https://github.com/paddy10tellys/endovelicus.git 
+
+see https://www.digitalocean.com/community/tutorials/how-to-use-top-netstat-du-other-tools-to-monitor-server-resources#netstat
+
+Build the image using the following nb a docker image is a blueprint for starting a container
+
+$ docker build -t endovelicus-app:latest .          # t is tag
+
+    [ NB
+    When you docker build -t tagname .     
+    you are creating an image and tag it with a "name:tag" format usually. So for example, you are building your image as
+    docker build -t myimage:1.0 .
+    which creates a new image that is named myimage with a version of 1.0. This is what you will see when you run docker images
+    ]
+
+Run the Docker container using the command shown below.
+
+$ docker run -d -p 5000:5000 endovelicus-app
+
+   [ NB
+   Tagging is not the same as naming. The name is the running containes that docker ps would show
+   -d detached
+   -p 5000:5000 forwards the exposed port 5000 on the container to port 5000 on the host machine. We use the default port for the Flask web server, 5000
+   ]
+
+Alternatively, build from remote repo using
+
+$ docker build https://github.com/paddy10tellys/endovelicus.git 
+
+Run the Docker container using the command shown below.
+
+$ docker run -d -p 5000:5000 <container ID>
+
+The application will be accessible at http://46.101.26.198:5000 or if you are using boot2docker then first find ip address using $ boot2docker ip and the use the ip http://<host_ip>:5000
+
+NB think about doing this even though it seems v complicated https://medium.com/travis-on-docker/how-to-version-your-docker-images-1d5c577ebf54
+
+
+pmy@test:~/endovelicus$ sudo apt-get update
+
+pmy@test:~/endovelicus$ sudo apt autoremove                                                                                                                                                                             
+
+sudo apt-get install nginx
+
+see https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-14-04-lts
+
+pmy@test:~/endovelicus$ ip addr show eth0 | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'
+46.101.26.198
+10.16.0.5
+fe80::3ce9:f0ff:feb9:31f1
+
+Make sure that the web server will restart automatically when the server is rebooted by typing:
+pmy@test:~/endovelicus$ sudo update-rc.d nginx defaults
+
+see https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-14-04
+see https://blog.marksteve.com/deploy-a-flask-application-inside-a-digitalocean-droplet/
+see https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-virtual-hosts-on-ubuntu-14-04-lts
+
+5/9/17
+pmy@test:~/endovelicus$ source virtualenvwrapper.sh
+pmy@test:~/endovelicus$ mkvirtualenv -- venv
+New python executable in /home/pmy/.virtualenvs/venv/bin/python
+Installing setuptools, pip, wheel...done.
+(venv) pmy@test:~/endovelicus$ lsvirtualenv
+venv
+====
+
+
+
+docker rm -f $(docker ps -aq)
+docker rmi -f $(docker images -q)
+
+docker system prune -a    # does both of the above
+
+http://kimh.github.io/blog/en/docker/gotchas-in-writing-dockerfile-en/
+ do this first
+ https://www.digitalocean.com/community/tutorials/how-to-run-nginx-in-a-docker-container-on-ubuntu-14-04
+ 
+ then this
+ http://www.patricksoftwareblog.com/how-to-configure-nginx-for-a-flask-web-application/
+ 
+ then this
+ http://www.patricksoftwareblog.com/how-to-use-docker-and-docker-compose-to-create-a-flask-application/
+ 
+pmy@test:~$ nginx -v
+nginx version: nginx/1.10.3 (Ubuntu)
+
+pmy@test:~$ sudo apt-get purge nginx nginx-common
+dpkg: warning: while removing nginx-common, directory '/var/www/html' not empty so not removed
+
+pmy@test:~$ ls /var/www/html
+index.nginx-debian.html
+
+pmy@test:~$ nginx -v
+bash: /usr/sbin/nginx: No such file or directory
+
+pmy@test:~$ sudo docker run --name docker-nginx -p 80:80 -d nginx
+ad4df852a950e5928d17ca6c4c0b5685476b406ce181841291bfb25d6dd5ce82
+
+pmy@test:~$ docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                NAMES
+ad4df852a950        nginx               "nginx -g 'daemon ..."   2 minutes ago       Up 2 minutes        0.0.0.0:80->80/tcp   docker-nginx
+
+pmy@test:~$ mkdir -p ~/docker-nginx/html       #  -p, --parents     no error if existing, make parent directories as needed
+
+pmy@test:~$ ls
+docker-nginx  notes.txt
+
+pmy@test:~$ cd ~/docker-nginx/html
+
+pmy@test:~/docker-nginx/html$ 
+/home/pmy/docker-nginx/html
+
+pmy@test:~/docker-nginx/html$ 
+
+pmy@test:~/docker-nginx$ sudo docker run --name docker-nginx -p 80:80 -d -v ~/docker-nginx/html:/usr/share/nginx/html nginx
+bacba4bfcee4f569595aa2c592a5a0b6c499349bb9f250899a722ae992f2ec7e
+
+
+pmy@test:/usr/local/share$ cd ~/docker-nginx
+
+pmy@test:~/docker-nginx$ pwd
+/home/pmy/docker-nginx
+
+
+pmy@test:~/docker-nginx$ cd ~/docker-nginx
+
+pmy@test:~/docker-nginx$ sudo docker cp docker-nginx:/etc/nginx/conf.d/default.conf default.conf
+
+pmy@test:~/docker-nginx$ sudo docker stop docker-nginx
+docker-nginx
+
+pmy@test:~/docker-nginx$ sudo docker rm docker-nginx
+docker-nginx
+
+6/9/17
+
+The -v flag creates a symbolic link between the droplet's filesystem and the container's filesystem which maps the local folder (~/docker-nginx/html) to a relative path 
+in the container (/usr/share/nginx/html). This allows us to edit our existing web page files and add new ones into the directory and our container will automatically access them
+
+pmy@test:~$ sudo docker run --name docker-nginx -p 80:80 -v ~/docker-nginx/html:/usr/share/nginx/html -v ~/docker-nginx/default.conf:/etc/nginx/conf.d/default.conf -d nginx
+
+
+pmy@test:~$ docker exec -it <name-of-container> bash       #  explore a running docker container
+
+pmy@test:~$ docker exec -it docker-nginx bash
+
+root@96472b6a61fc:/# ls /etc 
+adduser.conf            cron.daily      dpkg         group      hostname   kernel         localtime    motd           os-release  profile    rc3.d  resolv.conf  shadow                     subgid    ucf.conf
+alternatives            debconf.conf    environment  group-     hosts      ld.so.cache    login.defs   mtab           pam.conf    profile.d  rc4.d  rmt          shadow-                    subuid    update-motd.d
+apt                     debian_version  fonts        gshadow    init.d     ld.so.conf     logrotate.d  nginx          pam.d       rc0.d      rc5.d  securetty    shells                     systemd
+bash.bashrc             default         fstab        gshadow-   issue      ld.so.conf.d   machine-id   nsswitch.conf  passwd      rc1.d      rc6.d  security     skel                       terminfo
+bindresvport.blacklist  deluser.conf    gai.conf     host.conf  issue.net  libaudit.conf  mke2fs.conf  opt            passwd-     rc2.d      rcS.d  selinux      staff-group-for-usr-local  timezone
+
+root@96472b6a61fc:/# ls /etc/nginx/conf.d
+default.conf
+root@96472b6a61fc:/# 
+
+root@96472b6a61fc:/# exit
+exit
+
+pmy@test:~$ docker run --rm -it --entrypoint=/bin/bash <name-of-image>     # explore a docker image 
+
+pmy@test:~$ docker run --rm -it --entrypoint=/bin/bash nginx
+
+root@5ddf071da66b:/# ls
+bin  boot  dev  etc  home  lib  lib32  lib64  libx32  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+
+root@5ddf071da66b:/# exit
+exit
+pmy@test:~$ 
+
+see https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-virtual-hosts-on-ubuntu-14-04-lts
+
+Step One — Set Up New Document Root Directories
+
+By default, Nginx on Ubuntu 14.04 has one server block enabled by default. It is configured to serve documents out of a directory at:
+
+/usr/share/nginx/html
+
+nb the symlinks made in line 1316 are pointing to this & will need changing by restarting the docker with a -v flag that points at /var/www subdirectories representing endovelicus.world 
+& endovelicus.network that I will shortly create
+
+I won't use the default since it is easier to work with things in the /var/www directory. Ubuntu's Nginx package does not use /var/www as its document root by default due to a Debian policy about
+packages utilizing /var/www
+
+pmy@test:~$ ls /var/www     # this is what's in there now
+html
+
+pmy@test:~$ ls /var/www/html
+index.nginx-debian.html
+
+Since I am a user, not package maintainer, I can tell Nginx that this is where I want the document roots to be. Specifically, I want a directory for each of endovelicus site within
+the /var/www directory that has a subdirectory called html to hold the actual files
+
+First, I need to create the necessary directories. Do this with the following command. The -p flag tells mkdir to create any necessary parent directories along the way:
+
+pmy@test:~$ sudo mkdir -p /var/www/endovelicus.network/html
+
+pmy@test:~$ sudo mkdir -p /var/www/endovelicus.world/html
+
+pmy@test:~$ ls /var/www
+endovelicus.network  endovelicus.world  html
+
+Transfer ownership to me the regular user pmy not root. I can use the $USER environmental variable to substitute the user account that I am currently signed in on. This will allow me to create files
+in this directory without allowing any visitors to create content
+
+pmy@test:~$ sudo chown -R $USER:$USER /var/www/endovelicus.network/html
+
+pmy@test:~$ sudo chown -R $USER:$USER /var/www/endovelicus.world/html
+
+pmy@test:~$ ls -lta /var/www/endovelicus.world/html        # check it worked                                                                                                                                                              
+total 8
+drwxr-xr-x 2 pmy  pmy  4096 Sep  6 09:56 .
+drwxr-xr-x 3 root root 4096 Sep  6 09:56 ..
+
+pmy@test:~$ sudo chmod -R 755 /var/www              # to be abssolutely certain
+
+pmy@test:~$ ls -lta /var/www/endovelicus.world/html    # double check
+total 8
+drwxr-xr-x 2 pmy  pmy  4096 Sep  6 09:56 .
+drwxr-xr-x 3 root root 4096 Sep  6 09:56 ..
+
+Step Two — Create Sample Pages for Each Site
+
+NB the directory structure is set up
+Create a default page for each of our sites
+
+Create an index.html file in your endovelicus.network:
+
+pmy@test:~$ vi /var/www/endovelicus.network/html/index.html       # nb c9 open /var/www/endovelicus.network/html/index.html does not work!!!
+
+Inside the file, we'll create a really basic file that indicates what site we are currently accessing. It will look like this:
+
+<html>
+    <head>
+        <title>Welcome to Endovelicus.network!</title>
+    </head>
+    <body>
+        <h1>Success!  The Endovelicus.network server block is working!</h1>
+    </body>
+</html>
+
+Save and close the file when you are finished.
+
+pmy@test:~$ cp /var/www/endovelicus.network/html/index.html /var/www/endovelicus.world/html/    # copy
+
+pmy@test:~$ vi /var/www/endovelicus.world/html/index.html     # edit appropriately  
+
+
+Step Three — Create Server Block Files for Each Domain
+
+I have the content to serve
+I need files that actually create the server blocks that will tell Nginx how to do this
+Nginx contains one server block called default 
+Use as a 
+
+The -v flag creates a symbolic link between the droplet's filesystem and the container's filesystem which maps the local folder (~/docker-nginx/html) to a relative path 
+in the container (/usr/share/nginx/html). This allows us to edit our existing web page files and add new ones into the directory and our container will automatically access them
+
+pmy@test:~$ sudo docker run --name docker-nginx -p 80:80 -v ~/docker-nginx/html:/usr/share/nginx/html -v ~/docker-nginx/default.conf:/etc/nginx/conf.d/default.conf -d nginx
+
+pmy@test:~$ sudo docker run --name docker-nginx -p 80:80 -v ~/docker-nginx/html:/var/www/endovelicus.network/html -d nginx
+
+
+
+use exec to get /etc/nginx/sites-available/default and then this needs to be copied into /etc/nginx/sites-available/endovelicus.network
+
+docker exec -it docker-nginx bash
+
+The default nginx configuration of the official Docker image will include all the .conf files in the /etc/nginx/conf.d folder 
+We will use these files to add the needed server block directives
+
+root@96472b6a61fc:/# ls /etc/nginx/conf.d
+default.conf     # i.e., there's only one...
+This needs to be copied, altered & saved as ??IDK endovelicus.network.conf
+
+
+root@96472b6a61fc:/# more /etc/nginx/conf.d/default.conf                                                                                                                                                                
+server {
+    listen       80;
+    server_name  localhost;
+
+    #charset koi8-r;
+    #access_log  /var/log/nginx/host.access.log  main;
+
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+    }
+
+    #error_page  404              /404.html;
+
+    # redirect server error pages to the static page /50x.html
+    #
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+
+    # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+    #
+    #location ~ \.php$ {
+    #    proxy_pass   http://127.0.0.1;
+    #}
+
+    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+    #
+    #location ~ \.php$ {
+    #    root           html;
+    #    fastcgi_pass   127.0.0.1:9000;
+    #    fastcgi_index  index.php;
+    #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+    #    include        fastcgi_params;
+    #}
+
+    # deny access to .htaccess files, if Apache's document root
+    # concurs with nginx's one
+    #
+    #location ~ /\.ht {
+    #    deny  all;
+    #}
+}
+
+
+
+
+add endovelicus.network & endovelicus.world subdirectories underneath docker-nginx/html directory
+put index.html files into each (done) but also add default.conf files - to be edited appropriately
+(I'm giving up on var.www for now...)
+
+pmy@test:~$ sudo docker stop docker-nginx
+docker-nginx
+
+pmy@test:~$ sudo docker rm docker-nginx
+docker-nginx
+
+pmy@test:~$ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+
+pmy@test:~$ sudo docker run --name docker-nginx -p 80:80 -v ~/docker-nginx/html:/usr/share/nginx/html -v ~/docker-nginx/conf.d:/etc/nginx/conf.d -d nginx
+
+pmy@test:~$ sudo docker run --name docker-nginx -p 80:80 -v ~/docker-nginx/html:/usr/share/nginx/html -v ~/docker-nginx/conf.d:/etc/nginx/conf.d -d nginx
+1f7e23846f6225124aa123b3a83d2f7d66c49e377f9d39f1b6e6a573600d51bd
+
+docker run --name docker_nginx \
+-v ~/docker-nginx/html:/usr/share/nginx/html*:ro \
+-v ~/docker-nginx/conf.d:/etc/nginx/conf.d*:ro \
+-p 80:80 -d nginx
+
+
+
+docker exec -it docker_nginx bash
+
+ls -la /var/log/nginx
+
+Remember to update hosts file to check the local configuration, add something like:
+127.0.0.1 endovelicus.network
+127.0.0.1 endovelicus.world
+
+pmy@test:~$ sudo vi /etc/hosts
+pmy@test:~$ 
+
+
+docker run --name docker-nginx \
+-v /var/www:/usr/share/nginx/html:ro \
+-v /var/nginx/conf:/etc/nginx:ro \
+-p 80:80 -d nginx
+
+
+ sudo vi /var/nginx/conf/endovelicus.network.conf
+
+
+sudo ln -s /var/nginx/conf /etc/nginx/conf.d 
+
+
+docker rm -f $(docker ps -aq)
+docker rmi -f $(docker images -q)
+
+docker system prune -a    # does both of the above
+
+
+
+
+7/9/17
+
+Virtual environments offer a way for managing and isolating dependencies on a per-project basis. Moreover, they also avoid
+the whole sudo pip install situation, which is a security risk as explained in https://askubuntu.com/a/802594/15003.
+The official Python documentation also encourages the use of virtual environments. The easiest way to create and use virtual
+environments for both Python 2 and Python 3 is to install virtualenv & use a virtualenv for each Python project.
+After activation, use pip to install Python packages as usual; NEVER USE SUDO in a virtualenv, if possible
+note that there is no need to use pip3 for Python 3.
+See https://askubuntu.com/questions/802544/is-sudo-pip-install-still-a-broken-practice?noredirect=1&lq=1
+
+INSTALL VIRTUALENVWRAPPER
+nb read https://virtualenvwrapper.readthedocs.io/en/latest/
+
+pmy@test:~$ pip install virtualenvwrapper
+pmy@test:~$ Successfully installed pbr six stevedore virtualenv virtualenv-clone virtualenvwrapper
+You are using pip version 8.1.1, however version 9.0.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+pmy@test:~$ pip install --upgrade pip
+Successfully installed pip-9.0.1
+
+pmy@test:~$ source virtualenvwrapper.sh
+
+pmy@test:~$ mkvirtualenv -- venv
+New python executable in /home/pmy/.virtualenvs/venv/bin/python
+
+(venv) pmy@test:~$ export WORKON_HOME=$HOME/.virtualenvs
+(venv) pmy@test:~$ echo $WORKON_HOME
+/home/pmy/.virtualenvs
+
+(venv) pmy@test:~$ find -iname "virtualenv" | grep bin
+./.local/bin/virtualenv
+
+(venv) pmy@test:~$ which virtualenv
+/home/pmy/.local/bin/virtualenv
+(venv) pmy@test:~$ 
+
+(venv) pmy@test:~$ python -V
+Python 2.7.12
+
+CHECK ENVIRONMENT VARIABLES
+see just exported environment variables, use declare -px:
+https://askubuntu.com/questions/755109/list-all-environment-variables-and-show-if-they-are-exported-or-not
+
+declare: usage: declare [-aAfFgilnrtux] [-p] [name[=value] ...]
+(venv) pmy@test:~$ declare -px
+
+(neo4j-flask) pmy@test:~$ workon venv
+(venv) pmy@test:~$ rmvirtualenv neo4j-flask
+Removing neo4j-flask...
+(venv) pmy@test:~$ lsvirtualenv
+venv
+====
+
+
+(venv) pmy@test:~$ pip install flask
+Requirement already satisfied: flask in
+
+(venv) pmy@test:~$ pip install py2neo==2.0.8
+
+(venv) pmy@test:~$ pip install bcrypt
+
+(venv) pmy@test:~$ pip install passlib
+
+(venv) pmy@test:~$ sudo service nginx restart
+
+venv) pmy@test:~$ python app.py                                                                                                                                                                                        
+ * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+80.3.54.82 - - [07/Sep/2017 11:10:37] "GET / HTTP/1.1" 200 -
+
+(venv) pmy@test:~$ ls
+app.py  docker-nginx  notes.txt  requirements.txt
+
+(venv) pmy@test:~$ pip install -r requirements.txt
+Requirement already satisfied: Flask in ./.virtualenvs/venv/lib/python2.7/site-packages (from -r requirements.txt (line 1))
+Collecting gunicorn (from -r requirements.txt (line 2))
+  Downloading gunicorn-19.7.1-py2.py3-none-any.whl (111kB)
+Successfully installed gunicorn-19.7.1
+
+You can now try running your app with Gunicorn:
+
+gunicorn -b 0.0.0.0:8000 app:app
+
+(venv) pmy@test:~$ gunicorn -b 0.0.0.0:8000 app:app
+[2017-09-07 12:04:02 +0000] [11987] [INFO] Starting gunicorn 19.7.1
+[2017-09-07 12:04:02 +0000] [11987] [INFO] Listening at: http://0.0.0.0:8000 (11987)
+[2017-09-07 12:04:02 +0000] [11987] [INFO] Using worker: sync
+[2017-09-07 12:04:02 +0000] [11992] [INFO] Booting worker with pid: 11992
+
+The command above runs gunicorn listening to any host at port 8000 using the WSGI app named app inside the app module.
+
+You should be able to see your app working at http://<DROPLET_PUBLIC_IP_ADDRESS>:8000
+www.endovelicus.network:8000
+
+pmy@test:~$ vi /etc/nginx/conf.d/flask-app.conf                                                                                                                                                                         
+pmy@test:~$ sudo vi /etc/nginx/conf.d/flask-app.conf                                                                                                                                                                    
+[sudo] password for pmy: 
+pmy@test:~$ sudo vi /etc/nginx/nginx.conf                                                                                                                                                                               
+pmy@test:~$ service nginx reload
+==== AUTHENTICATING FOR org.freedesktop.systemd1.manage-units ===
+Authentication is required to reload 'nginx.service'.
+Authenticating as: Paddy Young,,, (pmy)
+Password: 
+==== AUTHENTICATION COMPLETE ===
+pmy@test:~$ 
+
+pmy@test:~$ source virtualenvwrapper.sh
+pmy@test:~$ workon venv
+(venv) pmy@test:~$ gunicorn --bind 0.0.0.0:8000 app:app
+(venv) pmy@test:~$ gunicorn --bind 0.0.0.0:8000 app:app
+[2017-09-07 15:41:13 +0000] [14854] [INFO] Starting gunicorn 19.7.1
+[2017-09-07 15:41:13 +0000] [14854] [INFO] Listening at: http://0.0.0.0:8000 (14854)
+[2017-09-07 15:41:13 +0000] [14854] [INFO] Using worker: sync
+[2017-09-07 15:41:13 +0000] [14859] [INFO] Booting worker with pid: 14859
+
+see https://stackoverflow.com/questions/12858674/serving-a-request-from-gunicorn
+
+Go to /etc/nginx/nginx.conf and under the http{} make sure you have: include /etc/nginx/site-enabled/*;
+
+http{
+    # other configurations (...)
+    include /etc/nginx/sites-enabled/*;
+}
+
+
+pmy@test:~$ sudo mkdir -p /etc/gunicorn                                                                                                                                                                                 
+pmy@test:~$ sudo vi /etc/gunicorn/flaskproject.py  
+
+(venv) pmy@test:~$ ls /etc/gunicorn
+flaskproject.py
+
+(venv) pmy@test:~$ gunicorn -c /etc/gunicorn/flaskproject.py flaskproject:app
+
+(venv) pmy@test:~$ sudo systemctl stop nginx
+
+pmy@test:~$ sudo service nginx restart
+
+Job for nginx.service failed because the control process exited with error code. See "systemctl status nginx.service" and "journalctl -xe" for details.
+pmy@test:~$ systemctl status nginx.service
+● nginx.service - A high performance web server and a reverse proxy server
+   Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
+   Active: failed (Result: exit-code) since Thu 2017-09-07 20:53:06 BST; 1min 54s ago
+  Process: 15542 ExecStop=/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/nginx.pid (code=exited, status=0/SUCCESS)
+  Process: 14411 ExecReload=/usr/sbin/nginx -g daemon on; master_process on; -s reload (code=exited, status=0/SUCCESS)
+  Process: 13468 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+  Process: 16079 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=1/FAILURE)
+ Main PID: 13472 (code=exited, status=0/SUCCESS)
+ 
+pmy@test:~$ sudo nginx -t -c /etc/nginx/nginx.conf                                                                                                                                                                      
+nginx: [emerg] a duplicate default server for 0.0.0.0:80 in /etc/nginx/sites-enabled/flaskproject:2
+nginx: configuration file /etc/nginx/nginx.conf test failed
+
+
+
+You likely have other files (such as the default configuration) located in /etc/nginx/sites-enabled that needs to be removed.
+
+This issue is caused by a repeat of the default_server parameter supplied to one or more listen directives in your files. You'll likely find this conflicting directive reads something similar to:
+
+listen 80 default_server;
+
+As the nginx core module documentation for listen states:
+
+    The default_server parameter, if present, will cause the server to become the default server for the specified address:port pair. If none of the directives have the default_server parameter then the first server with the address:port pair will be the default server for this pair.
+
+This means that there must be another file or server block defined in your configuration with default_server set for port 80. nginx is encountering that first before your mysite.com file so try removing or adjusting that other configuration.
+
+If you are struggling to find where these directives and parameters are set, try a search like so:
+
+
+pmy@test:~$ grep -R default_server /etc/nginx
+/etc/nginx/sites-available/default:     listen 80 default_server;
+/etc/nginx/sites-available/default:     listen [::]:80 default_server;
+/etc/nginx/sites-available/default:     # listen 443 ssl default_server;
+/etc/nginx/sites-available/default:     # listen [::]:443 ssl default_server;
+/etc/nginx/sites-available/endovelicus.network: listen 80 default_server;
+/etc/nginx/sites-available/endovelicus.network: listen [::]:80 default_server;
+/etc/nginx/sites-available/endovelicus.network: # listen 443 ssl default_server;
+/etc/nginx/sites-available/endovelicus.network: # listen [::]:443 ssl default_server;
+/etc/nginx/sites-available/endovelicus.world:   # listen 443 ssl default_server;
+/etc/nginx/sites-available/endovelicus.world:   # listen [::]:443 ssl default_server;
+/etc/nginx/sites-enabled/endovelicus.network:   listen 80 default_server;
+/etc/nginx/sites-enabled/endovelicus.network:   listen [::]:80 default_server;
+/etc/nginx/sites-enabled/endovelicus.network:   # listen 443 ssl default_server;
+/etc/nginx/sites-enabled/endovelicus.network:   # listen [::]:443 ssl default_server;
+/etc/nginx/sites-enabled/endovelicus.world:     # listen 443 ssl default_server;
+/etc/nginx/sites-enabled/endovelicus.world:     # listen [::]:443 ssl default_server
+
+pmy@test:~$ sudo vi /etc/nginx/sites-enabled/flaskproject
+NB I changed the first line within the server block from listen 80 default; to listen 80;
+
+server {
+    listen 80; # this means nginx will be
+                       # listening requests on port 80 and
+                       # this will be the default nginx server
+    server_name localhost;
+
+    # declare proxy params and values to forward to your gunicorn webserver
+    proxy_pass_request_headers on;
+    proxy_pass_request_body on;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_read_timeout 120s;
+
+    location / {
+        # here is where you declare that every request to /
+        # should be proxy to 127.0.0.1:8000 (which is where
+        # your gunicorn will be running on)
+        proxy_pass_header Server;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Scheme $scheme;
+        proxy_connect_timeout 10;
+        proxy_read_timeout 10;
+    
+        proxy_pass http://127.0.0.1:8000/; # the actual nginx directive to
+                                           # forward the request
+    }
+}   
+
+horrayy!
+my@test:~$ /etc/init.d/nginx start 
+[....] Starting nginx (via systemctl): nginx.service==== AUTHENTICATING FOR org.freedesktop.systemd1.manage-units ===
+Authentication is required to start 'nginx.service'.
+Authenticating as: Paddy Young,,, (pmy)
+Password: 
+==== AUTHENTICATION COMPLETE ===
+. ok 
+
+ANYWAY THEN I PUT IT BACK IN BUT COMMENTED OUT IN /etc/nginx/sites-enabled/endovelicus.network
+
+pmy@test:~$ source virtualenvwrapper.sh
+pmy@test:~$ workon venv
+(venv) pmy@test:~$ gunicorn -c /etc/gunicorn/flaskproject.py flaskproject:app
+(venv) pmy@test:~$ 
+STILL DOES FUCKALL!!!
+
+pmy@test:~$ sudo ufw allow 8000
+Rules updated
+Rules updated (v6)
+
+gunicorn --bind 0.0.0.0:8000 run:app
+
+gunicorn -b 127.0.0.1:8080
+
+http://www.onurguzel.com/how-to-run-flask-applications-with-nginx-using-gunicorn/
+
+step 2 done
+
+8/9/17 
+
+pmy@test:~$ ls /etc/nginx/sites-enabled 
+endovelicus.network  endovelicus.world  flaskproject
+
+PLAN: altered flaskproject, emptied endovelicus.network - copied the contents of both into /home/pmy/was_conf.txt
+
+NB if YOU GET THIS ERROR MESSAGE WHILE TRYING TO START nginx
+
+pmy@test:~$ sudo service nginx start
+Job for nginx.service failed because the control process exited with error code. See "systemctl status nginx.service" and "journalctl -xe" for details.
+
+YOU NEED TO CHK YOUR CONFIGURATION FILES WITH
+pmy@test:~$ sudo nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: [emerg] open() "/home/pmy/run/logs/access.log" failed (2: No such file or directory)
+nginx: configuration file /etc/nginx/nginx.conf test failed
+
+NB this was sorted by just creating the directory for the error logs
+
+pmy@test:~$ mkdir -p /home/pmy/run/logs
+
+
+pmy@test:~$ sudo nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+pmy@test:~$ sudo service nginx start
+
+
+nb I re-read http://www.onurguzel.com/how-to-run-flask-applications-with-nginx-using-gunicorn/
+and this summary is helpful http://www.philchen.com/2015/08/08/how-to-make-a-scalable-python-web-app-using-flask-and-gunicorn-nginx-on-ubuntu-14-04
+http://pythonhow.com/how-a-flask-app-works/   # explains flask
+
+Gunicorn is Python WSGI HTTP server that uses pre-fork model. It means that it has master process running which creates and controls worker processes. Worker processes handle requests. 
+
+
+(venv) pmy@test:~$ gunicorn -w 4 -b 127.0.0.1:8000 app:app &
+
+NB FROM (venv) pmy@test:~$ gunicorn -h
+
+ -w INT, --workers INT
+                        The number of worker processes for handling requests.
+                        [1]
+
+ -b ADDRESS, --bind ADDRESS
+                        The socket to bind. [['0.0.0.0:8080']]
+                        
+
+nb views.py was originally called app.py before it was renamed 
+
+With regards to app:app the second app is a flask object, the first is usually the name of a python file without the .py
+where the views are defined & the application is run however that essentially is what _name_ does
+
+__name__ is just a convenient way to get the import name of the place the app is defined. Flask uses the import name to know where to look up resources, templates, static files, instance folder, etc. 
+When using a package, if you define your app in __init__.py then the __name__ will still point at the "correct" place relative to where the resources are. However, if you define it elsewhere, such as mypackage/app.py, then using __name__ would tell Flask to look for resources relative to mypackage.app instead of mypackage.
+
+see https://stackoverflow.com/questions/39393926/flaskapplication-versus-flask-name
+
+To kill the process you could fire series of these commands:
+ps aux | grep gunicorn
+then identify the PID (I would refer to it as $PID) of the gunicorn process and stop it gracefully:
+
+kill $PID
+or stop it forcefully:
+
+kill -9 $PID
+
+9/9/17 see http://nicolewhite.github.io/neo4j-jupyter/hello-world.html
+http://kvangundy.com/wp/set-up-neo4j-and-docker/
+
+nb the app must be run with gunicorn not the built in flask server so run.py is redundant
+NOW we run using 
+
+gunicorn -w 4 -b 127.0.0.1:8000 --chdir blog views:app &
+
+
+ so, gunicorn binds port 8000 on localhost, changes directory to blog, launches 4 workers (4 pid's) which serve the flask application by getting an app object from views.py
+ 
+ (venv) pmy@test:~$ ps aux | grep gunicorn    # shows gunicorn threads
+
+(venv) pmy@test:~$ kill -9 `ps aux | grep gunicorn | awk '{print $2}'`      # to kill off gunicorn PID's 
+
+docker rm -f $(docker ps -aq)
+docker rmi -f $(docker images -q)
+
+docker system prune -a    # does both of the above
+
+
+(venv) pmy@test:~$ docker build https://github.com/paddy10tellys/neo4j_docker.git                                                                                                                                    
+Sending build context to Docker daemon  139.8kB ...
+
+... Successfully built bb39574031e2
+
+
+docker run --publish=7474:7474 \
+        --publish=7687:7687 \
+        --publish=7473:7473 \
+        -v $HOME/neo4j/data:/data \
+        -v $HOME/neo4j/logs:/logs \
+        -v $HOME/neo4j/import:/var/lib/neo4j/import \
+        -v $HOME/neo4j/conf/:/conf/ \
+        neo4j:latest
+        <container ID>
+      
+  
+        docker run --env=NEO4J_AUTH=none \
+        --publish=7474:7474 \
+        --publish=7687:7687 \
+        --publish=7473:7473 \
+        -v $HOME/neo4j/data:/data \
+        -v $HOME/neo4j/logs:/logs \
+        -v $HOME/neo4j/import:/var/lib/neo4j/import \
+        -v $HOME/neo4j/conf/:/conf \
+        neo4j:latest
+        136b56f29bfc
+
+      
+      
+      
+(venv) pmy@test:~$ docker run --publish=7474:7474 \
+>         --publish=7687:7687 \
+>         --publish=7473:7473 \
+>         -v $HOME/neo4j/data:/data \
+>         -v $HOME/neo4j/logs:/logs \
+>         -v $HOME/neo4j/import:/var/lib/neo4j/import \
+>         -v $HOME/neo4j/conf/:/conf/ \
+>         neo4j:latest
+Unable to find image 'neo4j:latest' locally
+latest: Pulling from library/neo4j
+88286f41530e: Pull complete 
+009f6e766a1b: Pull complete 
+132a112fc74a: Pull complete 
+7953a2197bdd: Pull complete 
+53e03f7e235a: Pull complete 
+0b565811e3d7: Pull complete 
+cfeaa83fdc90: Pull complete 
+Digest: sha256:66e861b7fe23b638303ea235b08501185ccc77f86ae67e738693f7f7d9591e87
+Status: Downloaded newer image for neo4j:latest
+Active database: graph.db
+Directories in use:
+  home:         /var/lib/neo4j
+  config:       /var/lib/neo4j/conf
+  logs:         /logs
+  plugins:      /var/lib/neo4j/plugins
+  import:       /var/lib/neo4j/import
+  data:         /var/lib/neo4j/data
+  certificates: /var/lib/neo4j/certificates
+  run:          /var/lib/neo4j/run
+Starting Neo4j.
+OpenJDK 64-Bit Server VM warning: INFO: os::commit_memory(0x00000000e0000000, 536870912, 0) failed; error='Out of memory' (errno=12)
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 536870912 bytes for committing reserved memory.
+# An error report file with more information is saved as:
+# /var/lib/neo4j/hs_err_pid1.log
+
+see https://hub.docker.com/_/neo4j/
+
+https://help.github.com/articles/duplicating-a-repository/
+
+https://neo4j.com/developer/python/#_py2neo
+http://odewahn.github.io/docker-jumpstart/building-images-with-dockerfiles.html
+http://timothybramlett.com/docker_tutorial_for_python_apps.html
+http://kvangundy.com/wp/set-up-neo4j-and-docker/
+http://nicolewhite.github.io/neo4j-jupyter/hello-world.html
+
+pmy@test:~$ chown $USER -R ~/neo4j
+
+pmy@test:~$ sudo chown $USER -R ~/neo4j      
+
+
+11/9/17
+docker rm -f $(docker ps -aq)
+docker rmi -f $(docker images -q)
+
+docker system prune -a    # does both of the above
+
+pmy@test:~$ ps aux | grep gunicorn
+
+./rungun.sh
+
+https://github.com/technige/nige.tech.old/blob/master/content/whats-new-in-py2neo-v3.syntaq
+https://neo4j.com/developer/
+https://neo4j.com/graphacademy/online-training/introduction-graph-databases/
+https://neo4j.com/graphacademy/neo4j-certification/
+
+
+>>> data = graph.cypher.execute("MATCH (p:Person)-[:PRODUCED]->(m:Movie) RETURN p.name AS name, m.title AS movie LIMIT 5")
+>>> data
+   | name          | movie                 
+---+---------------+------------------------
+ 1 | Joel Silver   | The Matrix            
+ 2 | Joel Silver   | The Matrix Reloaded   
+ 3 | Joel Silver   | The Matrix Revolutions
+ 4 | Cameron Crowe | Jerry Maguire         
+ 5 | Nora Ephron   | When Harry Met Sally  
+ 
+ >>> exit()
+(venv) pmy@test:~$ pip uninstall py2neo
+Uninstalling py2neo-2.0.8:
+Proceed (y/n)? y
+  Successfully uninstalled py2neo-2.0.8
+  
+(venv) pmy@test:~$ pip install py2neo
+Successfully installed py2neo-3.1.2
+
+>>> from py2neo import Graph
+>>> graph = Graph()
+>>> data = graph.cypher.execute("MATCH (p:Person)-[:PRODUCED]->(m:Movie) RETURN p.name AS name, m.title AS movie LIMIT 5")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Graph' object has no attribute 'cypher'
+
+>>> graph.run("MATCH (p:Person)-[:PRODUCED]->(m:Movie) RETURN p.name AS name, m.title AS movie LIMIT 5")                                                                                                             
+<py2neo.database.Cursor object at 0x7f756bb8cf10>
+
+see http://py2neo.org/v3/database.html
+
+Note The previous version of py2neo allowed Cypher execution through Graph.cypher.execute(). This facility is now instead accessible via Graph.run() and returns a 
+lazily-evaluated Cursor rather than an eagerly-evaluated RecordList
+
+>>> data = graph.run("MATCH (p:Person)-[:PRODUCED]->(m:Movie) RETURN p.name AS name, m.title AS movie LIMIT 5")  
+
+>>> type(data)
+<class 'py2neo.database.Cursor'>
+NB this is not a <class 'py2neo.cypher.core.RecordList'> which is what graph.cypher.execute() the equivalent to graph.run would have returned if using the previous version of 
+py2neo 2.08
+
+>>> type(data[0])
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'Cursor' object does not support indexing
+
+>>> for member in data: print(member)
+... 
+(u'name': u'Cameron Crowe', u'movie': u'Jerry Maguire')
+(u'name': u'Nora Ephron', u'movie': u'When Harry Met Sally')
+
+Using py2neo v3 to connect to neo4j DB: How can I convert <class 'py2neo.database.Cursor'> to a dictionary or list in python?
+
+>>> records = list(data)
+>>> print(records)
+[(u'name': u'Joel Silver', u'movie': u'The Matrix'), (u'name': u'Joel Silver', u'movie': u'The Matrix Reloaded'), (u'name': u'Joel Silver', u'movie': u'The Matrix Revolutions'), (u'name': u'Cameron Crowe', u'movie': u'Jerry Maguire'), (u'name': u'Nora Ephron', u'movie': u'When Harry Met Sally')]
+>>> print(records[0])
+(u'name': u'Joel Silver', u'movie': u'The Matrix')
+
+>>> records[0][0]
+u'Joel Silver'
+
+>>> for item in records: print(item[0])
+... 
+Joel Silver
+Joel Silver
+Joel Silver
+Cameron Crowe
+Nora Ephron
+
+12/9/17
+
+>>> from py2neo import Graph
+>>> graph = Graph()
+>>> DataFrame(graph.run("MATCH (p:Person)-[:PRODUCED]->(m:Movie) RETURN p.name AS name, m.title AS movie LIMIT 5").data())
+                    movie           name
+0              The Matrix    Joel Silver
+1     The Matrix Reloaded    Joel Silver
+2  The Matrix Revolutions    Joel Silver
+3           Jerry Maguire  Cameron Crowe
+4    When Harry Met Sally    Nora Ephron
+>>> 
+
+>>> data = DataFrame(graph.run(  "MATCH (p:Person)-[:PRODUCED]->(m:Movie) RETURN p.name AS name, m.title AS movie LIMIT 5").data()  )
+
+>>> type(data)
+<class 'pandas.core.frame.DataFrame'>
+
+>>> data.loc[:, "movie"]
+0                The Matrix
+1       The Matrix Reloaded
+2    The Matrix Revolutions
+3             Jerry Maguire
+4      When Harry Met Sally
+Name: movie, dtype: object
+
+see http://pythonhow.com/accessing-dataframe-columns-rows-and-cells/
+
+>>> query = "MATCH (p:Person)-[:ACTED_IN]->(m:Movie) WHERE m.title = {movie} RETURN p.name"
+
+>>> graph.cypher.execute(query, {"movie":"The Matrix"})      # how to do it v2 py2neo
+
+>>> graph.run(query, {"movie":"The Matrix"}).data()    # how to do it in v3 py2neo
+
+[{u'p.name': u'Emil Eifrem'}, {u'p.name': u'Hugo Weaving'}, {u'p.name': u'Keanu Reeves'}, {u'p.name': u'Laurence Fishburne'}, {u'p.name': u'Carrie-Anne Moss'}]
+
+
+>>> data = DataFrame( graph.run(query, {"movie":"The Matrix"}).data() )
+>>> 
+>>> print(data)
+               p.name
+0         Emil Eifrem
+1        Hugo Weaving
+2        Keanu Reeves
+3  Laurence Fishburne
+4    Carrie-Anne Moss
+
+
+>>> data = DataFrame( graph.run(query, {"movie":"Jerry Maguire"}).data() )
+>>> print(data)
+              p.name
+0    Renee Zellweger
+1   Cuba Gooding Jr.
+2         Tom Cruise
+3        Regina King
+4  Jonathan Lipnicki
+5           Jay Mohr
+6        Bonnie Hunt
+7      Kelly Preston
+8    Jerry O'Connell 
+
+>>> data = graph.run("MATCH (p:Person)-[:PRODUCED]->(m:Movie) RETURN p, m").data() 
+>>> print(data)
+[{u'p': (b449321:Person {born:1952,name:"Joel Silver"}), u'm': (dac0444:Movie {released:1999,tagline:"Welcome to the Real World",title:"The Matrix"})}, {u'p': (b449321:Person {born:1952,name:"Joel Silver"}), u'm': (e811a83:Movie {released:2003,tagline:"Free your mind",title:"The Matrix Reloaded"})}, {u'p': (b449321:Person {born:1952,name:"Joel Silver"}), u'm': (a790c82:Movie {released:2003,tagline:"Everything that has a beginning has an end",title:"The Matrix Revolutions"})}, {u'p': (d92cd83:Person {born:1957,name:"Cameron Crowe"}), u'm': (c6ca982:Movie {released:2000,tagline:"The rest of his life begins now.",title:"Jerry Maguire"})}, {u'p': (d0bdf4a:Person {born:1941,name:"Nora Ephron"}), u'm': (e5503d9:Movie {released:1998,tagline:"At odds in life... in love on-line.",title:"When Harry Met Sally"})}, {u'p': (adb6fd3:Person {born:1947,name:"Rob Reiner"}), u'm': (e5503d9:Movie {released:1998,tagline:"At odds in life... in love on-line.",title:"When Harry Met Sally"})}, {u'p': (a696a4e:Person {born:1961,name:"Stefan Arndt"}), u'm': (a615e8b:Movie {released:2012,tagline:"Everything is connected",title:"Cloud Atlas"})}, {u'p': (b449321:Person {born:1952,name:"Joel Silver"}), u'm': (f7eba7f:Movie {released:2006,tagline:"Freedom! Forever!",title:"V for Vendetta"})}, {u'p': (bab4c93:Person {born:1965,name:"Lana Wachowski"}), u'm': (f7eba7f:Movie {released:2006,tagline:"Freedom! Forever!",title:"V for Vendetta"})}, {u'p': (b972b4d:Person {born:1967,name:"Lilly Wachowski"}), u'm': (f7eba7f:Movie {released:2006,tagline:"Freedom! Forever!",title:"V for Vendetta"})}, {u'p': (b449321:Person {born:1952,name:"Joel Silver"}), u'm': (b5cfa96:Movie {released:2008,tagline:"Speed has no limits",title:"Speed Racer"})}, {u'p': (b449321:Person {born:1952,name:"Joel Silver"}), u'm': (d482b15:Movie {released:2009,tagline:"Prepare to enter a secret world of assassins",title:"Ninja Assassin"})}, {u'p': (bab4c93:Person {born:1965,name:"Lana Wachowski"}), u'm': (d482b15:Movie {released:2009,tagline:"Prepare to enter a secret world of assassins",title:"Ninja Assassin"})}, {u'p': (b972b4d:Person {born:1967,name:"Lilly Wachowski"}), u'm': (d482b15:Movie {released:2009,tagline:"Prepare to enter a secret world of assassins",title:"Ninja Assassin"})}, {u'p': (c34bfd2:Person {born:1949,name:"Nancy Meyers"}), u'm': (d26f17b:Movie {released:2003,title:"Something's Gotta Give"})}]
+
+
+
+>>> data = DataFrame(graph.run("MATCH (p:Person)-[:PRODUCED]->(m:Movie) RETURN p, m").data() )
+>>> print(data)
+                                                    m  \
+0   {u'tagline': u'Welcome to the Real World', u't...   
+1   {u'tagline': u'Free your mind', u'title': u'Th...   
+2   {u'tagline': u'Everything that has a beginning...   
+3   {u'tagline': u'The rest of his life begins now...   
+4   {u'tagline': u'At odds in life... in love on-l...   
+5   {u'tagline': u'At odds in life... in love on-l...   
+6   {u'tagline': u'Everything is connected', u'tit...   
+7   {u'tagline': u'Freedom! Forever!', u'title': u...   
+8   {u'tagline': u'Freedom! Forever!', u'title': u...   
+9   {u'tagline': u'Freedom! Forever!', u'title': u...   
+10  {u'tagline': u'Speed has no limits', u'title':...   
+11  {u'tagline': u'Prepare to enter a secret world...   
+12  {u'tagline': u'Prepare to enter a secret world...   
+13  {u'tagline': u'Prepare to enter a secret world...   
+14  {u'released': 2003, u'title': u'Something's Go...   
+
+                                               p  
+0       {u'born': 1952, u'name': u'Joel Silver'}  
+1       {u'born': 1952, u'name': u'Joel Silver'}  
+2       {u'born': 1952, u'name': u'Joel Silver'}  
+3     {u'born': 1957, u'name': u'Cameron Crowe'}  
+4       {u'born': 1941, u'name': u'Nora Ephron'}  
+5        {u'born': 1947, u'name': u'Rob Reiner'}  
+6      {u'born': 1961, u'name': u'Stefan Arndt'}  
+7       {u'born': 1952, u'name': u'Joel Silver'}  
+8    {u'born': 1965, u'name': u'Lana Wachowski'}  
+9   {u'born': 1967, u'name': u'Lilly Wachowski'}  
+10      {u'born': 1952, u'name': u'Joel Silver'}  
+11      {u'born': 1952, u'name': u'Joel Silver'}  
+12   {u'born': 1965, u'name': u'Lana Wachowski'}  
+13  {u'born': 1967, u'name': u'Lilly Wachowski'}  
+14     {u'born': 1949, u'name': u'Nancy Meyers'}  
+
+>>> data[0]
+{u'p': (b449321:Person {born:1952,name:"Joel Silver"}), u'm': (dac0444:Movie {released:1999,tagline:"Welcome to the Real World",title:"The Matrix"})}
+
+>>> data[0]["p"]
+(b449321:Person {born:1952,name:"Joel Silver"})
+
+>>> type(data[0]["p"])
+<class 'py2neo.types.Node'>
+
+>>> data[0]["p"]["born"]
+1952
+>>> data[0]["p"]["name"]
+u'Joel Silver'
+
+>>> graph.delete_all()
+
+created run.py which contains:
+
+import os # to interface with underlying operating system
+from blog import app
+
+os.system("sh ./rungun.sh")
+
+
+13/9/17
+ps aux | grep gunicorn
+kill -9 `ps aux | grep gunicorn | awk '{print $2}'`
+
+venv) pmy@test:~$ sudo ufw disable
+Firewall stopped and disabled on system startup     # TRYING sudo ufw enable WAS A FUCKING 
+
+changed rungun.sh to this
+gunicorn -w 4 -b 127.0.0.1:8000 --chdir blog --log-level debug --reload views:app & 
+the log-level debug and the --reload flags mean that the workers are restarted whenever application code changes
+
+(venv) pmy@test:~$ python run.py
+...
+Traceback (most recent call last):
+  File "run.py", line 2, in <module>
+    from blog import app  # import the app variable from the blog package
+  File "/home/pmy/blog/__init__.py", line 11, in <module>
+    graph.run("CREATE CONSTRAINT ON (n:User) ASSERT n.username IS UNIQUE")
+TypeError: unbound method run() must be called with Graph instance as first argument (got str instance instead)
+
+the above palava happened because I wrote graph = Graph rather than graph = Graph()
+
+
+#app.secret_key = os.urandom(24)    nb I had to move this from __init__.py into views.py after the line app = Flask(__name__)
+# otherwise i got  raise RuntimeError('The session is unavailable because no secret ' RuntimeError: The session is 
+# because no secret key was set.  Set the secret_key on the application to something unique and secret.
+see http://flask.pocoo.org/docs/0.12/quickstart/#sessions
+
+line 122, in validate_secret
+    raise exc.ExpectedStringError(secret, "secret")
+TypeError: secret must be unicode or bytes, not werkzeug.datastructures.ImmutableMultiDict
+
+>>> import os
+>>> os.urandom(24)
+'\x02\xb3\x00l1Jk\xf6\xab\x00\x05\xf9\x7f\xf1wF\x1d\x8b1U<&3\xc7'
+
+#app.secret_key = os.urandom(24)   # this had to be moved here from run.py
+app.secret_key = '\x02\xb3\x00l1Jk\xf6\xab\x00\x05\xf9\x7f\xf1wF\x1d\x8b1U<&3\xc7'
+
+
+https://nicolewhite.github.io/neo4j-flask/pages/add-a-post.
+
+15/9/17
+
+Chrome fucks up logins because sometimes the session cookie works, sometimes it doesn't
+solution was to change these lines in rungun.sh
+#gunicorn -w 4 -b 127.0.0.1:8000 --chdir blog --log-level debug --reload views:app & 
+gunicorn -w 4 -b endovelicus.network:8000 --chdir blog --log-level debug --reload views:app & 
+
+This post below suggests that as a fix
+see https://stackoverflow.com/questions/27254013/why-does-the-session-cookie-work-when-serving-from-a-domain-but-not-when-using-an-ip
+    
+    
+File "/home/pmy/blog/models.py", line 74, in add_post
+    t = graph.merge_one("Tag", "name", tag)
+AttributeError: 'Graph' object has no attribute 'merge_one'
+
+see https://stackoverflow.com/questions/38334386/py2neo-updating-existing-node-with-new-properties-w-uniqueness-constraint-mer
+
+https://buildasaasappwithflask.com/
+
+In python, set() is an unordered collection with no duplicate elements. 
+
+tag is a set of tags
+
+for each tag in the set
+
+t = graph.merge(tag)
+
+https://www.reddit.com/r/flask/comments/5l2gmf/af_eli5_how_sessions_work_in_flask/
+
+https://stackoverflow.com/questions/46237062/how-to-use-graph-merge-py2neo-v3-to-replace-graph-merge-one-in-nicole-white/46243020#46243020
+
+https://stackoverflow.com/questions/36487132/how-to-find-out-if-cookie-expired-in-flask-app/36496036#36496036
+
+https://pythonhosted.org/Flask-Session/
+
+16/9/17
+changed rungun.sh to use one worker after reading https://github.com/abourget/gevent-socketio/issues/132        works great!!!
+
+To keep statefullness, ideally, one client should always connect to the same worker. Even with front load balancers, the same path through reverse proxies should be kept
+for the duration of the socketio connection.
+
+I think I have tracked down the issue to these two added lines in socketio.server.SocketIOServer.get_socket():
+
+2e251cec socketio/server.py       (Alexandre Bourget       2012-11-15 17:29:02 -0500 131)         if sessid and not socket:
+2e251cec socketio/server.py       (Alexandre Bourget       2012-11-15 17:29:02 -0500 132)             return None  # you ask for a session that doesn't exist!
+To elaborate, it looks like each worker process is given its own SocketIOServer, and each SocketIOServer maintains its own dictionary (self.sockets) mapping sessids to Sockets.
+
+During the connection process, two separate requests are made. First, a request is made to: /socket.io/1/ (which I guess is the handshake?),
+and then this is followed up by another call to something like /socket.io/1/websocket/419838463361 (which actually establishes the socket).
+
+If one worker handles the first request, and then another worker handles the second request, the second request is going to fail because it won't be able to find the sessid saved
+by the first worker on its instance of SocketIOServer.
+
+The reason it works sporadically is because sometimes you would coincidentally have the same worker handle both requests, so it will be able to find the sessid it saved.
+Of course, the more workers you have, the less likely that is to occur, which explains the behavior reported in issue #125.
+
+Commenting out those 2 lines of code resolves the issue, but I'm not familiar enough with the project to know whether that's a suitable long term solution.
+(It will end up creating a duplicate Socket on the second worker. I haven't seen where they are being cleaned up but I guess it could cause a leak or be problematic in some other way?)
+
+having 2 or more workers, means 2 or more processes. Each process is independant, holds its own Python objects. The socket.io lib keeps a list of open sockets
+within it's process.. so if it happens 2 users are connected to this process, then "broadcasting" will send messages to those connected locally..
+it doesn't know about users connected to another worker, nothing is shared between them.
+
+https://stackoverflow.com/questions/10938360/how-many-concurrent-requests-does-a-single-flask-process-receive
+
+https://stackoverflow.com/questions/35837786/how-to-run-flask-with-gunicorn-in-multithreaded-mode?noredirect=1&lq=1
+
+You need to use async worker like gevent to allow concurrency with one worker: gunicorn -k gevent --worker-connections 1000
+
+
+19/9/17
+
+(venv) pmy@test:~$ python
+Python 2.7.12 (default, Nov 19 2016, 06:48:10) 
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import py2neo
+>>> from pandas import DataFrame
+>>> graph = Graph()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'Graph' is not defined
+>>> from py2neo import Graph
+>>> graph = Graph()
+>>> query2 = ''' MATCH (user1: User)-[:PUBLISHED]->(:Post)<-[:TAGGED]-(tag:Tag), (user2: User)-[:PUBLISHED]->(:Post)<-[:TAGGED]-(tag) WHERE user1.username = {username1} AND user2.username = {username2} RETURN COLLECT(DISTINCT tag.name) AS tags '''
+>>> tags = DataFrame( graph.run(query2, username1="pmy", username2="fred").data() )
+>>> print(type(tags))
+<class 'pandas.core.frame.DataFrame'>
+>>> print(tags)
+               tags
+0  [py2neo, python]
+>>> tags["tags"][0]
+[u'py2neo', u'python']
+>>> type(tags["tags"][0])
+<type 'list'>
+
+https://www.mail-archive.com/dev@ctakes.apache.org/msg03393.
+
+
+
+
+
+20/9/17
+see http://bioboxes.org/docs/build-your-image/
+
+see https://www.mail-archive.com/dev@ctakes.apache.org/msg03393.html  # ctakes in a docker container
+
+http://kimh.github.io/blog/en/docker/gotchas-in-writing-dockerfile-en/
+
+https://deis.com/blog/2015/dockerfile-instructions-syntax/
+
+added dockerfile to ctakes directory
+
+copied over the /apache-ctakes-4.0.0/bin/runClinicalPipeline.sh file from the ctakes workspace on c9 to this droplet
+as this had pw, user & other paramters needed to launch ctakes already setup right...
+
+(venv) pmy@test:~/ctakes$ docker build --tag ctakes_image
+Successfully built 00bc77c34b0d
+Successfully tagged ctakes_image:latest
+
+NB log in using the --interactive and --tty flags. Specify a shell command to run also, in this case use /bin/bash
+
+(venv) pmy@test:~/ctakes$ docker run --interactive --tty ctakes_image /bin/bash   
+root@1ce5d0b56b30:/# cd apache-ctakes-4.0.0      # notice the bash prompt is now the docker bash prompt
+
+I did this to workout how to setup the moves the dockerfile needs to make to add the resources file & the note_input
+& results_output directories
+
+You can exit this container with CTRL+D
+
+root@1ce5d0b56b30:/# exit
+(venv) pmy@test:~/ctakes$
+
+docker cp <containerId>:/file/path/within/container /host/path/target
+(venv) pmy@test:~/ctakes$ docker cp 6667f82dcc96:apache-ctakes-4.0.0/bin/runClinicalPipeline.sh $(pwd) 
+
+(venv) pmy@test:~/ctakes$ docker run --interactive --tty ctakes_image /bin/bash   
+root@3c804c518dd2:/# mv apache-ctakes-4.0.0/bin/runClinicalPipeline.sh apache-ctakes-4.0.0/bin/runClinicalPipelineBACKUP.sh
+root@3c804c518dd2:/# ls apache-ctakes-4.0.0/bin
+OpenCmd.bat  ant.bat      ctakes.profile           runClinicalPipelineBACKUP.sh  runDictionaryCreator.sh  runPiperCreator.sh  runPiperFile.sh   runctakesCPE.sh   runctakesCVD.sh  ytexweb.bat
+ant          ctakes-ytex  runClinicalPipeline.bat  runDictionaryCreator.bat      runPiperCreator.bat      runPiperFile.bat    runctakesCPE.bat  runctakesCVD.bat  setenv.bat       ytexweb.sh
+
+docker cp /file/path/within/host <containerId>:/file/path/within/container 
+(venv) pmy@test:~/ctakes$ docker cp $(pwd)/runClinicalPipeline.sh 6667f82dcc96:apache-ctakes-4.0.0/bin/runClinicalPipeline.sh
+
+
+docker run -v /host/directory:/container/directory -other -options image_name command_to_run
+docker run -v $(pwd)/ctakes/note_input:/apache-ctakes-4.0.0/note_input  $(pwd)/ctakes/note_input:/apache-ctakes-4.0.0/results_output -other -options ctakes_image /bin/bash
+
+docker ps -aq
+docker images -q
+docker rm -f $(docker ps -aq)
+docker rmi -f $(docker images -q)
+
+docker system prune -a    # does both of the above
+
+(venv) pmy@test:~/ctakes$ docker ps -aq
+79124a20658f
+b5d80590cbe8
+
+apache-ctakes-4.0.0/bin/ctakes-ytex/scripts/data/umls/SRFLD.xml
+CONTAINER           CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O           PIDS
+79124a20658f        0.00%               0B / 0B               0.00%               0B / 0B             0B / 0B             0
+b5d80590cbe8        0.63%               803.4MiB / 1.953GiB   40.17%              87.5MB / 2.81GB     18.9MB / 7.41MB     57
+
+docker container kill [OPTIONS] CONTAINER [CONTAINER...]
+
+(venv) pmy@test:~/ctakes$ docker container kill 79124a20658f
+Error response from daemon: Cannot kill container 79124a20658f: Container 79124a20658fc6c063dcbc98b7e686685117fa4e57a2e1f4e327826825123fcd is not running
+
+docker rm -f 79124a20658f 
+
+(venv) pmy@test:~/ctakes$ docker rm -f 79124a20658f 
+79124a20658f
+
+(venv) pmy@test:~/ctakes$ docker ps -aq                                                                                                                                          
+b5d80590cbe8    # this is the neo4j container
+
+21/9/17
+
+(venv) pmy@test:~/ctakes$ export CTAKES_HOME=~/ctakes/apache-ctakes-4.0.0   
+
+(venv) pmy@test:~/ctakes$ echo $CTAKES_HOME     
+/home/pmy/ctakes/apache-ctakes-4.0.0 
+
+(venv) pmy@test:~/ctakes$ cd $CTAKES_HOME
+(venv) pmy@test:~/ctakes/apache-ctakes-4.0.0$ 
+
+(venv) pmy@test:~/ctakes/apache-ctakes-4.0.0$ bin/runClinicalPipeline.sh  -i note_input  --xmiOut results_output
+
+OpenJDK 64-Bit Server VM warning: INFO: os::commit_memory(0x000000071ab00000, 457703424, 0) failed; error='Cannot allocate memory' (errno=12)
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 457703424 bytes for committing reserved memory.
+# An error report file with more information is saved as:
+# /home/pmy/ctakes/apache-ctakes-4.0.0/hs_err_pid2025.log
+
+
+
+see https://github.com/paddy10tellys/neo4j_docker
+
+pmy@test:~$ docker build https://github.com/paddy10tellys/neo4j_docker.git 
+Successfully built 05aefbf36cee
+pmy@test:~$ 
+
+docker run --publish=7474:7474 \
+        --publish=7687:7687 \
+        --publish=7473:7473 \
+        -v $HOME/neo4j/data:/data \
+        -v $HOME/neo4j/logs:/logs \
+        -v $HOME/neo4j/import:/var/lib/neo4j/import \
+        -v $HOME/neo4j/conf/:/conf/ \
+        neo4j:latest
+        05aefbf36cee
+        
+        
+logged in with neo4j/neo4j then reset pw (its in Lastpass)
+
+changed line 12 in models.py 
+from 
+graph = Graph()
+to
+graph = Graph(user='neo4j', password='bin789MAN')
+to run the graph with authentication
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-16-04
+
+(venv) pmy@test:~$ sudo swapon --show
+Returns zilch
+
+(venv) pmy@test:~$ free -h
+              total        used        free      shared  buff/cache   available
+Mem:           2.0G        950M        126M        5.8M        923M        839M
+Swap:            0B          0B          0B
+
+(venv) pmy@test:~$ free -h
+              total        used        free      shared  buff/cache   available
+Mem:           2.0G        950M        126M        5.8M        923M        839M
+Swap:            0B          0B          0B
+(venv) pmy@test:~$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+udev            992M     0  992M   0% /dev
+tmpfs           201M  5.7M  195M   3% /run
+/dev/vda1        20G  8.9G   11G  47% /
+tmpfs          1001M   64K 1001M   1% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+tmpfs          1001M     0 1001M   0% /sys/fs/cgroup
+/dev/vda15      105M  3.4M  102M   4% /boot/efi
+tmpfs           201M     0  201M   0% /run/user/1000
+
+SWAPFILE USING: 
+       NB fallocate is used  to manipulate the allocated disk space for a file,
+       either to deallocate or preallocate it.  For filesystems which  support
+       the  fallocate system call, preallocation is done quickly by allocating
+       blocks and marking them as uninitialized, requiring no IO to  the  data
+       blocks.   This  is  much faster than creating a file by filling it with
+       zeroes.
+
+https://medium.com/towards-data-science/lessons-learned-digital-ocean-for-python-3-e2442db4246f
+http://manpages.ubuntu.com/manpages/zesty/man1/fallocate.1.html
+
+A swap file (or swap space or, in Windows NT, a pagefile) is a space on a hard disk used as the virtual memory extension of a computer's real memory
+(RAM). Having a swap file allows your computer's operating system to pretend that you have more RAM than you actually do. The least recently used files
+in RAM can be "swapped out" to your hard disk until they are needed later so that new files can be "swapped in" to RAM.
+
+(venv) pmy@test:~$ sudo fallocate -l 4G /swapfile  # l stands for length
+
+(venv) pmy@test:~$ ls -lh /swapfile
+-rw-r--r-- 1 root root 4.0G Sep 21 09:51 /swapfile
+
+(venv) pmy@test:~$ sudo chmod 600 /swapfile
+
+(venv) pmy@test:~$ ls -lh /swapfile
+-rw------- 1 root root 4.0G Sep 21 09:51 /swapfile
+
+(venv) pmy@test:~$ sudo mkswap /swapfile
+Setting up swapspace version 1, size = 4 GiB (4294963200 bytes)
+no label, UUID=7f0cc6a7-5ea8-4bb8-80b3-42352e82a61e
+
+venv) pmy@test:~$ sudo swapon /swapfile
+
+(venv) pmy@test:~$ sudo swapon --show
+NAME      TYPE SIZE USED PRIO
+/swapfile file   4G   0B   -1
+
+(venv) pmy@test:~$ free -h
+              total        used        free      shared  buff/cache   available
+Mem:           2.0G        957M        118M        5.8M        924M        832M
+Swap:          4.0G          0B        4.0G
+
+(venv) pmy@test:~$ sudo cp /etc/fstab /etc/fstab.bak
+
+(venv) pmy@test:~$ echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+/swapfile none swap sw 0 0
+
+(venv) pmy@test:~$ cat /proc/sys/vm/swappiness
+60
+
+(venv) pmy@test:~$ cat /proc/sys/vm/vfs_cache_pressure
+100
+
+
+(venv) pmy@test:~$ sudo sysctl vm.vfs_cache_pressure=50
+vm.vfs_cache_pressure = 50
+
+
+(venv) pmy@test:~$ export CTAKES_HOME=~/ctakes/apache-ctakes-4.0.0 
+(venv) pmy@test:~$ echo $CTAKES_HOME
+/home/pmy/ctakes/apache-ctakes-4.0.0
+(venv) pmy@test:~$ cd CTAKES_HOME
+bash: cd: CTAKES_HOME: No such file or directory
+(venv) pmy@test:~$ cd $CTAKES_HOME
+(venv) pmy@test:~/ctakes/apache-ctakes-4.0.0$ bin/runClinicalPipeline.sh  -i note_input  --xmiOut results_output
+
+
+(venv) pmy@test:~/ctakes/apache-ctakes-4.0.0$ python
+Python 2.7.12 (default, Nov 19 2016, 06:48:10) 
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from os.path import abspath,realpath
+>>> abspath(note_input/note.txt)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'note_input' is not defined
+>>> abspath('note_input/note.txt')
+'/home/pmy/ctakes/apache-ctakes-4.0.0/note_input/note.txt'
+
+
+Patient reports cough, weight loss & lifelong smoking history. No haemoptysis.
+CXR nad. CAT scan thorax nad 
+
+Patient admits to pelvic pain, menorrhagia & Dysparunia. Laparoscopy nad. She has been started on norethisterone & discharged
+
+
+https://stackoverflow.com/questions/636561/how-can-i-run-an-external-command-asynchronously-from-python
+
+http://www.bogotobogo.com/python/python_subprocess_module.php
+
+
+The ecg showed changes compatible with an acute inferior myocardial infarction
+
+the skin is red, itchy, inflammed, all over his body, consistent with eczema
+
+
+https://stackoverflow.com/questions/29169607/neo4j-changing-node-properties
+
+
+>>> import py2neo
+>>> from py2neo import Graph, Node, Relationship
+>>> from pandas import DataFrame
+>>> graph = Graph(user='neo4j', password='bin789MAN')
+>>> t = Node("Tag", name="BOLLOX")
+>>> graph.merge(t)     # put the Tag into the database
+>>> selected = selector.select("Post", timestamp=1505546781).first()     # select the node to tag
+>>> rel=Relationship(t, "TAGGED", selected)   # 1st arg is the tag, 3rd arg is the node being tagged
+>>> graph.create(rel)  # actually create the relationship
+
+
+
+
+
+>>> my_node = graph.node(3)
+>>> my_node
+(c0beddb:Post {date:"2017-09-21",id:"7d1c9eec-566d-42d1-b5bd-d5d75cef83d0",text:"the skin is red, itchy, inflammed, all over his body, consistent with eczema",timestamp:1506000098,title:"Suspicious that subprocess.Popen actually works?"})
+>>> my_node["title"]
+u'Suspicious that subprocess.Popen actually works?'
+>>> my_node["id"]
+u'7d1c9eec-566d-42d1-b5bd-d5d75cef83d0'
+>>> rel=Relationship(t, "TAGGED", my_node)
+>>> graph.create(rel)
+
+
+>>> selected = selector.select("Post", timestamp=1505826314)                                                                                        
+>>> list(selected)
+[(deefe72:Post {date:"2017-09-19",id:"e0f08d21-afeb-49b7-b841-c6c366d11b62",text:"30 years in the building trade have injured my back
+& my joints",timestamp:1505826314,title:"building is bad for my back"})]
+
+>>> selected = selector.select("Post", timestamp=1505826314)                                                                                        
+>>> list(selected)
+[(deefe72:Post {date:"2017-09-19",id:"e0f08d21-afeb-49b7-b841-c6c366d11b62",text:"30 years in the building trade have injured my back & my joints",
+timestamp:1505826314,title:"building is bad for my back"})]
+>>> rel=Relationship(t, "TAGGED", selected)
+>>> graph.create(rel)
+
+
+If I use selector.select to select a historic post by its timestamp & then try to create a new tagged relationship the historic post it turns out that the historic post
+isn't actually tagged. However, a greyed-out circle containing the same information as the historic post appears in my graph & that ends up being tagged 
+rather than the historic post... why is that & how do I actually tag the historic post?
+
+
+
+<id>:424 date: 2017-09-19 text: 30 years in the building trade have injured my back & my joints
+id: e0f08d21-afeb-49b7-b841-c6c366d11b62 title: building is bad for my back timestamp: 1505826314
+
+MATCH (a:Post)
+WHERE a.title = "Save history to file note.txt"
+RETURN a
+
+
+MATCH (a:Post)
+WHERE a.id = "7d1c9eec-566d-42d1-b5bd-d5d75cef83d0"     # suspicious that subprocess
+RETURN a
+
+22/9/17
+
+>>> import py2neo
+>>> from py2neo import Graph, Node, Relationship
+>>> from pandas import DataFrame
+>>> graph = Graph(user='neo4j', password='bin789MAN')
+>>> t = Node("Tag", name="BOLLOX")
+>>> graph.merge(t)     # put the Tag into the database
+>>> selected = selector.select("Post", id='0596868b-17ed-44ff-b713-7c9dfd07efcd').first()   # select node to tag by its id
+>>> rel=Relationship(t, "TAGGED", selected)   # 1st arg is the tag, 3rd arg is the node being tagged
+>>> graph.create(rel)   # actually create the relationship in the graph
